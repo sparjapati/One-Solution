@@ -41,6 +41,6 @@ class LoginFragment : Fragment() {
 
     private fun verifyOtp(code: String) {
         Log.d(TAG, "verifyOtp: verification complete")
-//        findNavController().na
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNewRegistrationFragment(binding.etPhoneNumber.text.toString()))
     }
 }
