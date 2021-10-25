@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "492110058952",
+    "firebase_url": "https://one-solution-3f4b8-default-rtdb.firebaseio.com",
+    "project_id": "one-solution-3f4b8",
+    "storage_bucket": "one-solution-3f4b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492110058952:android:d6c1cd1333ede751719cfd",
+        "android_client_info": {
+          "package_name": "edu.vermaSanjay15907.oneSolution"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492110058952-g1q3v01fa14j6n0ngkr8v9bn9t55ohnq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.vermaSanjay15907.oneSolution",
+            "certificate_hash": "51c980ab06461923c83ce63c013c3d89ff5a2891"
+          }
+        },
+        {
+          "client_id": "492110058952-k6imdmsc0960g75vjulk5htj30n9hoof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsBzwYCQfI2rnW5K9YOLnSwiKTNmtLUV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492110058952-k6imdmsc0960g75vjulk5htj30n9hoof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

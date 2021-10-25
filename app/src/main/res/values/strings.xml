@@ -44,4 +44,5 @@
     <string name="country">Country</string>
     <string name="selected_image">Selected Image</string>
     <string name="delete_icon">Delete Icon</string>
+    <string name="india">India</string>
 </resources>
