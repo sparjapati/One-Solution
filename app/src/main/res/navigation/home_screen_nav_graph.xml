@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_homeFragment_to_newComplaintFragment"
             app:destination="@id/newComplaintFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_complaintDetailFragment"
+            app:destination="@id/complaintDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/newComplaintFragment"
@@ -19,5 +22,13 @@
         <action
             android:id="@+id/action_newComplaintFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/complaintDetailFragment"
+        android:name="edu.vermaSanjay15907.oneSolution.fragments.ComplaintDetailFragment"
+        android:label="ComplaintDetailFragment" >
+        <argument
+            android:name="ComplaintId"
+            app:argType="string" />
     </fragment>
 </navigation>

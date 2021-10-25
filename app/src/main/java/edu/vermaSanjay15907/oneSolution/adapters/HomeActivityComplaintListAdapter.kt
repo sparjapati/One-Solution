@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import edu.vermaSanjay15907.oneSolution.R
 import edu.vermaSanjay15907.oneSolution.databinding.HomeComplaintItemBinding
+import edu.vermaSanjay15907.oneSolution.fragments.HomeFragmentDirections
 import edu.vermaSanjay15907.oneSolution.models.Complaint
 
 class HomeActivityComplaintListAdapter(
@@ -23,6 +25,7 @@ class HomeActivityComplaintListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 //        val complaint = complaints[position]
+        val complaintId = ""
         holder.apply {
 
             complainingPersonName.text = "Demo Person"
@@ -56,6 +59,15 @@ class HomeActivityComplaintListAdapter(
 //                    override fun onCancelled(error: DatabaseError) {
 //                    }
 //                })
+        }
+
+        holder.binding.root.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(
+                    HomeFragmentDirections.actionHomeFragmentToComplaintDetailFragment(
+                        complaintId
+                    )
+                )
         }
 
     }

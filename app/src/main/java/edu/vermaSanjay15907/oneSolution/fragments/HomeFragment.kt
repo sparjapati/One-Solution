@@ -43,14 +43,9 @@ class HomeFragment : Fragment() {
         binding
             .btnAddNewComplaint.setOnClickListener {
                 Toast.makeText(activity, "Adding a new Complaint", Toast.LENGTH_SHORT).show()
-//                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewComplaintFragment())
-            }
-
-        binding
-            .btnAddNewComplaint.setOnClickListener {
-                Toast.makeText(activity, "Adding a new Complaint", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewComplaintFragment())
             }
+
 
         return binding.root
     }
