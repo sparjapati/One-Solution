@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.vermaSanjay15907.oneSolution.R
 import edu.vermaSanjay15907.oneSolution.activities.LoginActivity
@@ -43,6 +44,12 @@ class HomeFragment : Fragment() {
             .btnAddNewComplaint.setOnClickListener {
                 Toast.makeText(activity, "Adding a new Complaint", Toast.LENGTH_SHORT).show()
 //                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewComplaintFragment())
+            }
+
+        binding
+            .btnAddNewComplaint.setOnClickListener {
+                Toast.makeText(activity, "Adding a new Complaint", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewComplaintFragment())
             }
 
         return binding.root
