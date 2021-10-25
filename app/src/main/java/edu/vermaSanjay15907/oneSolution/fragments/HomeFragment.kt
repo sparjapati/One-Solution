@@ -8,15 +8,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import edu.vermaSanjay15907.oneSolution.R
 import edu.vermaSanjay15907.oneSolution.activities.LoginActivity
 import edu.vermaSanjay15907.oneSolution.adapters.HomeActivityComplaintListAdapter
 import edu.vermaSanjay15907.oneSolution.databinding.FragmentHomeBinding
 import edu.vermaSanjay15907.oneSolution.models.Complaint
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINTS
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var auth:FirebaseAuth
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +36,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
         val complaints = ArrayList<Complaint>()
 
         val homeActivityComplaintListAdapter =
@@ -38,6 +45,20 @@ class HomeFragment : Fragment() {
         binding.rvComplaints.layoutManager = layoutManager
         binding.rvComplaints.isNestedScrollingEnabled = false
         binding.rvComplaints.adapter = homeActivityComplaintListAdapter
+
+        database.reference.child(COMPLAINTS).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                complaints.clear()
+                for (dataSnapshot in snapshot.children) {
+                    dataSnapshot.getValue(Complaint::class.java)?.let { complaints.add(it) }
+                }
+                homeActivityComplaintListAdapter?.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
         binding
             .btnAddNewComplaint.setOnClickListener {

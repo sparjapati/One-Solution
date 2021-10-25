@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 object Konstants {
     const val TAG = "parjapat"
     const val STATUS_PENDING = "status_pending"
+    const val STATUS_SOLVED = "status_solved"
     const val USERS = "users"
     const val COMPLAINTS = "complaints"
     const val COMPLAINT_IMAGES="complaint_images"

@@ -155,7 +155,7 @@ class LoginFragment : Fragment() {
     private fun navigateToNewRegistrationFragment() {
         findNavController().navigate(
             LoginFragmentDirections.actionLoginFragmentToNewRegistrationFragment(
-                binding.etPhoneNumber.text.toString()
+                binding.tilPhoneNumber.prefixText.toString() + binding.etPhoneNumber.text.toString()
             )
         )
     }

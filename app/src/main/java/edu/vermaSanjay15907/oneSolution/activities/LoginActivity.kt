@@ -6,6 +6,7 @@ import edu.vermaSanjay15907.oneSolution.R
 class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_login)
     }
 }

@@ -13,18 +13,18 @@
             android:layout_height="match_parent"
             android:background="#C2CCA3">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/ivLogo"
                 android:layout_width="0dp"
                 android:layout_height="235dp"
                 android:layout_marginTop="48dp"
-                android:layout_marginEnd="15dp"
                 android:contentDescription="@string/logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/one_solution"
+                android:src="@drawable/one_solution"
+                app:riv_corner_radius="20dp"
                 tools:ignore="ImageContrastCheck" />
 
             <TextView
@@ -35,6 +35,7 @@
                 android:text="@string/sign_in_sign_up"
                 android:textColor="#1A4E7B"
                 android:textSize="24sp"
+
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="@+id/ivLogo"
                 app:layout_constraintHorizontal_bias="0.519"
@@ -85,8 +86,6 @@
                 android:layout_marginEnd="20dp"
                 app:helperTextTextColor="#E70808"
                 android:hint="@string/otp"
-                app:helperText="*Required"
-
                 app:layout_constraintEnd_toEndOf="@+id/tilPhoneNumber"
                 app:layout_constraintStart_toStartOf="@+id/tilPhoneNumber"
                 app:layout_constraintTop_toBottomOf="@+id/tilPhoneNumber">

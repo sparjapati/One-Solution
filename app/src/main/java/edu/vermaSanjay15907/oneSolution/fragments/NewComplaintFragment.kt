@@ -13,15 +13,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import edu.vermaSanjay15907.oneSolution.adapters.SelectImageRecyclerViewAdapter
 import edu.vermaSanjay15907.oneSolution.databinding.FragmentNewComplaintBinding
 import edu.vermaSanjay15907.oneSolution.models.Complaint
+import edu.vermaSanjay15907.oneSolution.models.User
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINTS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINTS_BY_LOCATIONS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINT_IMAGES
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.GET_IMAGE_REQUEST_CODE
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
 import java.util.*
@@ -66,7 +71,34 @@ class NewComplaintFragment : Fragment() {
             extractComplaintDetails()
             submitComplaint()
         }
+
+        setInitialData()
         return binding.root
+    }
+
+    private fun setInitialData() {
+        database.reference.child(USERS).child(auth.uid.toString()).child(PROFILE_DETAILS)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(User::class.java)
+                    Log.d(TAG, "NewComplaintFragment : ${auth.uid}")
+                    Log.d(TAG, "NewComplaintFragment: retrieving complaing user data $user")
+                    user?.let {
+                        binding.apply {
+                            etFirstName.setText(user.fname)
+                            etLastName.setText(user.lname)
+                            etCountry.setText(user.address.country)
+                            etState.setText(user.address.state)
+                            etDistrict.setText(user.address.district)
+                            etCity.setText(user.address.cityOrVillage)
+                            etRegisteredNumber.setText(user.mobileNumber)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
     }
 
     private fun submitComplaint() {
@@ -76,17 +108,16 @@ class NewComplaintFragment : Fragment() {
             if (imagesUris.size >= 0) {
                 val image = imagesUris[0]
                 val imageReference =
-                    storage.reference.child(COMPLAINT_IMAGES).child(auth.uid!!)
-                imageReference.child(image.lastPathSegment.toString()).putFile(image)
+                    storage.reference.child(COMPLAINT_IMAGES).child(auth.uid!!).child(image.lastPathSegment.toString())
+
+                imageReference.putFile(image)
                     .addOnCompleteListener { imageUploadTask ->
                         if (imageUploadTask.isSuccessful) {
                             Log.d(TAG, "submitComplaint: image uploaded")
-                            imageReference.downloadUrl.addOnCompleteListener { urlUri ->
-                                if (imageUploadTask.isSuccessful) {
-                                    complaint.images = urlUri.toString()
-                                    uploadComplaint(key)
-                                } else
-                                    Log.d(TAG, "submitComplaint: Error while downloading url")
+                            imageReference.downloadUrl.addOnSuccessListener { urlUri ->
+                                Log.d(TAG, "submitComplaint: $urlUri")
+                                complaint.images = urlUri.toString()
+                                uploadComplaint(key)
                             }
                         } else
                             Log.d(TAG, "submitComplaint: Some error occurred while uploading image")
@@ -100,8 +131,8 @@ class NewComplaintFragment : Fragment() {
         database.reference.child(COMPLAINTS).child(key!!).setValue(complaint)
             .addOnCompleteListener { uploadComplaintTask ->
                 if (uploadComplaintTask.isSuccessful) {
-                    linkToComplaintsByLocations(key)
-                    linkToUser(key)
+//                    linkToComplaintsByLocations(key)
+//                    linkToUser(key)
                     onComplaintSubmittedSuccessfully()
                 } else
                     Log.d(
