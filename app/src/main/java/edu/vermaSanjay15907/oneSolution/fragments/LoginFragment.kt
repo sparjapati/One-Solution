@@ -139,12 +139,13 @@ class LoginFragment : Fragment() {
         database.reference.child(USERS).child(uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        navigateToNewRegistrationFragment()
-                    } else {
+                    if (snapshot.exists())
                         navigateToHomeFragment()
-                    }
+                    else
+                        navigateToNewRegistrationFragment()
+
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                 }
 
@@ -152,16 +153,16 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToNewRegistrationFragment() {
-        val intent = Intent(activity, HomeActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun navigateToHomeFragment() {
         findNavController().navigate(
             LoginFragmentDirections.actionLoginFragmentToNewRegistrationFragment(
                 binding.etPhoneNumber.text.toString()
             )
         )
+    }
+
+    private fun navigateToHomeFragment() {
+        val intent = Intent(activity, HomeActivity::class.java)
+        startActivity(intent)
     }
 
     private fun onInvalidOtpEntered() {

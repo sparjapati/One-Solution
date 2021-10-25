@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import edu.vermaSanjay15907.oneSolution.activities.HomeActivity
 import edu.vermaSanjay15907.oneSolution.databinding.FragmentNewRegistrationBinding
 import edu.vermaSanjay15907.oneSolution.models.User
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
 
@@ -69,7 +70,7 @@ class NewRegistrationFragment : Fragment() {
 
     private fun registerUser(user: User) {
         val uid = auth.uid!!
-        database.reference.child(USERS).child(uid).setValue(user)
+        database.reference.child(USERS).child(uid).child(PROFILE_DETAILS).setValue(user)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful)
                     onRegistrationSuccessful()

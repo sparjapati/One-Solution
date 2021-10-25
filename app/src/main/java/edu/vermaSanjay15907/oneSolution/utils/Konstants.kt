@@ -9,6 +9,10 @@ object Konstants {
     const val TAG = "parjapat"
     const val STATUS_PENDING = "status_pending"
     const val USERS = "users"
+    const val COMPLAINTS = "complaints"
+    const val COMPLAINT_IMAGES="complaint_images"
+    const val COMPLAINTS_BY_LOCATIONS="complaints_by_locations"
+    const val PROFILE_DETAILS = "profile_details"
     const val GET_IMAGE_REQUEST_CODE = 100
 
     fun hideKeyboard(activity: Activity) {
