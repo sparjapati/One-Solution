@@ -20,9 +20,8 @@ class ComplaintImagesAdapter(private val context: Context, private val images: A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val url = images[position]
         Picasso.get().load(url).placeholder(R.drawable.placeholder)
-            .into(holder.binding.imageView)
-
-
+            .into(holder.binding.ivImage)
+        holder.binding.tvImageNumber.text = (position + 1).toString()
     }
 
     override fun getItemCount(): Int {

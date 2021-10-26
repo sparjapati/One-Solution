@@ -11,7 +11,7 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="gender">Gender</string>
-    <string name="address">address</string>
+    <string name="address">Address</string>
     <string name="sign_up">Sign Up</string>
     <string name="register_now">Register Now</string>
     <string name="complaint_photo">Complaint Photo</string>
@@ -47,4 +47,20 @@
     <string name="india">India</string>
     <string name="status">Status</string>
     <string name="person_name">Person Name</string>
+    <string name="locate_me_button">Locate Me Button</string>
+    <string name="complainer">Complainer</string>
+    <string name="locate_me_desc">This will open google map of given location</string>
+    <string name="description">Description</string>
+    <string name="attached_photos">Attached photos</string>
+    <string name="noImageUploaded">No image uploaded by user</string>
+    <string name="imageNo">0</string>
+    <string name="about_us_desc">This app <b>One Solution</b> has been developed by <b>NIT Kurukshetra</b> students. It facilitates the users to use their smartphone to work smartly. Using this app, you can submit your nearby issues or complaints to the concerned authority. All your need to create a free account and submit complaint and get status sitting at home.</string>
+    <string name="developers">-:Developers:-</string>
+    <string name="tushar_name">Tushar</string>
+    <string name="nikita_email">nikita_11912005@nitkkr.ac.in</string>
+    <string name="sanjay_name">Sanjay Verma</string>
+    <string name="tushar_email">tusharginotra2000@gmail.com</string>
+    <string name="nikita_name">Nikita</string>
+    <string name="sanjay_email">vermasanjay15907@gmail.com</string>
+    <string name="nitkkr_logo">NITKKR Logo</string>
 </resources>

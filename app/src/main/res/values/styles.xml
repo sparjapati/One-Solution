@@ -25,4 +25,20 @@
         <item name="android:textSize">30sp</item>
     </style>
 
+    <style name="about_us_developer_names">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="about_us_developer_email">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">#2942E8</item>
+    </style>
+
 </resources>

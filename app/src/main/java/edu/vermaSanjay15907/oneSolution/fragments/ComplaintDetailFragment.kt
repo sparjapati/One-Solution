@@ -60,7 +60,6 @@ class ComplaintDetailFragment : Fragment() {
                     complaint = complaintSnapshot.getValue(Complaint::class.java)
                     Log.d(TAG, "onDataChange: $complaint")
                     complaint?.apply {
-
                         database.reference.child(USERS)
                             .child(complainedBy).child(PROFILE_DETAILS)
                             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -85,8 +84,11 @@ class ComplaintDetailFragment : Fragment() {
                             tvComplaintAddress.setAddress(address)
                             tvComplaintDescription.text = description
                             // todo add all images
-                            images.add(complaint!!.images)
-                            adapter.notifyDataSetChanged()
+                            if (complaint!!.images != "") {
+                                images.add(complaint!!.images)
+                                adapter.notifyDataSetChanged()
+                            } else
+                                binding.tvNoPhoto.visibility = View.VISIBLE
                         }
                     }
                 }
