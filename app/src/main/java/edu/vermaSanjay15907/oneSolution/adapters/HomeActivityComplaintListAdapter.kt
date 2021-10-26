@@ -33,10 +33,8 @@ class HomeActivityComplaintListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val complaint = complaints[position]
-        val complaintId = ""
+        val complaintId = complaint.complaintId
         holder.apply {
-
-
             FirebaseDatabase.getInstance().reference.child(USERS).child(complaint.complainedBy)
                 .child(PROFILE_DETAILS)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -52,9 +50,11 @@ class HomeActivityComplaintListAdapter(
 //                            Picasso.get().load(complaint.images[0])
 //                                .placeholder(R.drawable.placeholder)
 //                                .into(holder.complaintPhoto)
-                        Picasso.get().load(complaint.images)
-                            .placeholder(R.drawable.placeholder)
-                            .into(holder.binding.ivComplaintPhoto)
+                        if (complaint.images != "") {
+                            Picasso.get().load(complaint.images)
+                                .placeholder(R.drawable.placeholder)
+                                .into(holder.binding.ivComplaintPhoto)
+                        }
 
                     }
 

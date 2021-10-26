@@ -3,157 +3,141 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E0BFBF"
         tools:context=".fragments.ComplaintDetailFragment">
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tvIsSolved"
+            style="@style/complaint_fragment_label_style"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/status"
+            android:textColor="#2E7D32"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivStatus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/yellow"
+            app:layout_constraintBottom_toBottomOf="@+id/tvIsSolved"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvIsSolved"
+            app:riv_corner_radius="10dp"
+            tools:ignore="ImageContrastCheck" />
+
+        <TextView
+            android:id="@+id/labelComplaintBy"
+            style="@style/complaint_fragment_label_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Complainer"
+            android:textColor="#2E7D32"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
+            app:layout_constraintTop_toBottomOf="@+id/tvIsSolved" />
+
+        <TextView
+            android:id="@+id/tvComplaintBy"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:orientation="vertical"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
+            android:maxWidth="@dimen/complaint_detail_fields_max_width"
+            android:text="@string/person_name"
+            android:textColor="#5D4037"
+            app:layout_constraintBottom_toBottomOf="@+id/labelComplaintBy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/labelComplaintBy"
+            app:layout_constraintVertical_bias="0.526"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/labelComplaintAddress"
+            style="@style/complaint_fragment_label_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Address"
+            android:textColor="#2E7D32"
+            app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
+            app:layout_constraintTop_toBottomOf="@+id/labelComplaintBy" />
+
+        <TextView
+            android:id="@+id/tvComplaintAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:maxWidth="@dimen/complaint_detail_fields_max_width"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/labelComplaintAddress"
+            app:layout_constraintEnd_toStartOf="@+id/btnLocateMe"
+            app:layout_constraintTop_toTopOf="@+id/labelComplaintAddress"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <ImageButton
+            android:id="@+id/btnLocateMe"
+            android:layout_width="32dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/tvComplaintAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvComplaintAddress"
+            app:srcCompat="@drawable/ic_locate"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/labelComplaintDescription"
+            style="@style/complaint_fragment_label_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Description"
+            android:textColor="#2E7D32"
+            app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
+            app:layout_constraintTop_toBottomOf="@+id/labelComplaintAddress"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tvComplaintDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
+            android:maxWidth="@dimen/complaint_detail_fields_max_width"
+            android:text="TextView"
+            android:textColor="#5D4037"
+            app:layout_constraintBottom_toBottomOf="@+id/labelComplaintDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/labelComplaintDescription"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/labelComplaintPhotos"
+            style="@style/complaint_fragment_label_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Attached photos"
+            android:textColor="#2E7D32"
+            app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
+            app:layout_constraintTop_toBottomOf="@+id/labelComplaintDescription" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvImages"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cvStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:id="@+id/tvIsSolved"
-                    style="@style/complaint_fragment_label_style"
-                    android:text="Status"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/ivStatus"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/yellow"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvIsSolved"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tvIsSolved"
-                    app:riv_corner_radius="10dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cvComplaintBy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:id="@+id/labelComplaintBy"
-                    style="@style/complaint_fragment_label_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Complainer"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/tvComplaintBy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="68dp"
-                    android:text="TextView"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/labelComplaintBy"
-                    app:layout_constraintVertical_bias="0.526" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cvComplaintAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:id="@+id/labelComplaintAddress"
-                    style="@style/complaint_fragment_label_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvComplaintAddress"
-                    android:layout_width="101dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/labelComplaintAddress" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cvComplaintDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:id="@+id/labelComplaintDescription"
-                    style="@style/complaint_fragment_label_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Description"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvComplaintDescription"
-                    android:layout_width="101dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/labelComplaintDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/cvComplaintPhotos"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/labelComplaintPhotos"
-                    style="@style/complaint_fragment_label_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="Attached photos" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvImages"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-
-        </LinearLayout>
-
+            app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
+            app:layout_constraintTop_toBottomOf="@+id/labelComplaintPhotos" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -7,9 +7,10 @@
 
     </data>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         tools:context=".fragments.NewComplaintFragment">
 
         <LinearLayout
@@ -202,7 +203,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ImageContrastCheck"
-                    tools:src="@drawable/placeholder" />
+                    android:src="@drawable/placeholder" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/btnAddImage"
@@ -223,7 +224,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSelectImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/btnSubmit"
@@ -234,7 +235,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </layout>

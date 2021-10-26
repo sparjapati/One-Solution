@@ -18,14 +18,15 @@ class ComplaintImagesAdapter(private val context: Context, private val images: A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-////        val imageUrl = images[position]
-//        Picasso.get().load(imageUrl).placeholder(R.drawable.placeholder)
-//            .into(holder.binding.imageView
+        val url = images[position]
+        Picasso.get().load(url).placeholder(R.drawable.placeholder)
+            .into(holder.binding.imageView)
+
+
     }
 
     override fun getItemCount(): Int {
-//        return images.size
-        return 15
+        return images.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

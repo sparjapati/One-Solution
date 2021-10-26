@@ -9,15 +9,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import edu.vermaSanjay15907.oneSolution.R
 import edu.vermaSanjay15907.oneSolution.adapters.SelectImageRecyclerViewAdapter
 import edu.vermaSanjay15907.oneSolution.databinding.FragmentNewComplaintBinding
 import edu.vermaSanjay15907.oneSolution.models.Complaint
@@ -67,6 +70,7 @@ class NewComplaintFragment : Fragment() {
             getImages()
         }
         binding.btnSubmit.setOnClickListener {
+            dialog.show()
             binding.btnSubmit.isEnabled = false
             extractComplaintDetails()
             submitComplaint()
@@ -82,7 +86,7 @@ class NewComplaintFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val user = snapshot.getValue(User::class.java)
                     Log.d(TAG, "NewComplaintFragment : ${auth.uid}")
-                    Log.d(TAG, "NewComplaintFragment: retrieving complaing user data $user")
+                    Log.d(TAG, "NewComplaintFragment: retrieving complaining user data $user")
                     user?.let {
                         binding.apply {
                             etFirstName.setText(user.fname)
@@ -105,10 +109,11 @@ class NewComplaintFragment : Fragment() {
         val key = database.reference.child(COMPLAINTS).push().key
         if (key != null) {
             complaint.complaintId = key
-            if (imagesUris.size >= 0) {
+            if (imagesUris.size > 0) {
                 val image = imagesUris[0]
                 val imageReference =
-                    storage.reference.child(COMPLAINT_IMAGES).child(auth.uid!!).child(image.lastPathSegment.toString())
+                    storage.reference.child(COMPLAINT_IMAGES).child(auth.uid!!)
+                        .child(image.lastPathSegment.toString())
 
                 imageReference.putFile(image)
                     .addOnCompleteListener { imageUploadTask ->
@@ -119,8 +124,10 @@ class NewComplaintFragment : Fragment() {
                                 complaint.images = urlUri.toString()
                                 uploadComplaint(key)
                             }
-                        } else
+                        } else {
                             Log.d(TAG, "submitComplaint: Some error occurred while uploading image")
+                            onComplaintSubmissionFailure()
+                        }
                     }
             } else
                 uploadComplaint(key)
@@ -134,12 +141,37 @@ class NewComplaintFragment : Fragment() {
 //                    linkToComplaintsByLocations(key)
 //                    linkToUser(key)
                     onComplaintSubmittedSuccessfully()
-                } else
-                    Log.d(
-                        TAG,
-                        "submitComplaint: some error occurred while uploading complaint "
-                    )
+                } else {
+                    onComplaintSubmissionFailure()
+                }
             }
+    }
+
+    private fun onComplaintSubmissionFailure() {
+        Log.d(
+            TAG,
+            "submitComplaint: some error occurred while uploading complaint "
+        )
+
+        val snackBar =
+            activity?.let {
+                Snackbar.make(
+                    it.findViewById(android.R.id.content),
+                    "Some Error Occurred!!!\nPlease try again",
+                    Snackbar.LENGTH_LONG
+                )
+            }
+        activity?.let {
+            ContextCompat.getColor(
+                it,
+                R.color.colorSnackbarError
+            )
+        }?.let {
+            snackBar?.view?.setBackgroundColor(
+                it
+            )
+        }
+        snackBar?.show()
     }
 
     private fun linkToUser(key: String?) {
@@ -147,16 +179,18 @@ class NewComplaintFragment : Fragment() {
             .child(COMPLAINTS).child(Date().time.toString())
             .setValue(key)
             .addOnCompleteListener { userLinkTask ->
-                if (userLinkTask.isSuccessful)
+                if (userLinkTask.isSuccessful) {
                     Log.d(
                         TAG,
                         "submitComplaint: linked to user successfully"
                     )
-                else
+                } else {
                     Log.d(
                         TAG,
                         "submitComplaint: linked to user failure"
                     )
+                    onComplaintSubmissionFailure()
+                }
             }
     }
 
@@ -173,11 +207,13 @@ class NewComplaintFragment : Fragment() {
                         TAG,
                         "submitComplaint: linked to location wise successfully"
                     )
-                else
+                else {
                     Log.d(
                         TAG,
                         "submitComplaint: linked to location wise failed"
                     )
+                    onComplaintSubmissionFailure()
+                }
             }
     }
 
@@ -219,6 +255,26 @@ class NewComplaintFragment : Fragment() {
 
     private fun onComplaintSubmittedSuccessfully() {
         Log.d(TAG, "Complaint submitted")
+        dialog.dismiss()
+        val snackBar =
+            activity?.let {
+                Snackbar.make(
+                    it.findViewById(android.R.id.content),
+                    "Complaint Submitted Successfully",
+                    Snackbar.LENGTH_LONG
+                )
+            }
+        activity?.let {
+            ContextCompat.getColor(
+                it,
+                R.color.colorSnackbarSuccess
+            )
+        }?.let {
+            snackBar?.view?.setBackgroundColor(
+                it
+            )
+        }
+        snackBar?.show()
         findNavController().navigate(NewComplaintFragmentDirections.actionNewComplaintFragmentToHomeFragment())
     }
 
@@ -227,8 +283,12 @@ class NewComplaintFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GET_IMAGE_REQUEST_CODE) {
             if (data != null) {
-                data.data?.let { imagesUris.add(it) }
-                binding.rvSelectImage.adapter?.notifyDataSetChanged()
+                data.data?.let {
+                    imagesUris.add(it)
+                    binding.rvSelectImage.adapter?.notifyDataSetChanged()
+//                    val viewHeight: Int = 150 * imagesUris.size
+//                    binding.rvSelectImage.layoutParams.height = viewHeight
+                }
             }
         }
     }
