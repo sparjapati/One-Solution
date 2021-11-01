@@ -87,15 +87,15 @@ class NewComplaintFragment : Fragment() {
                     val user = snapshot.getValue(User::class.java)
                     Log.d(TAG, "NewComplaintFragment : ${auth.uid}")
                     Log.d(TAG, "NewComplaintFragment: retrieving complaining user data $user")
-                    user?.let {
+                    user?.apply {
                         binding.apply {
-                            etFirstName.setText(user.fname)
-                            etLastName.setText(user.lname)
-                            etCountry.setText(user.address.country)
-                            etState.setText(user.address.state)
-                            etDistrict.setText(user.address.district)
-                            etCity.setText(user.address.cityOrVillage)
-                            etRegisteredNumber.setText(user.mobileNumber)
+                            etFirstName.setText(fname)
+                            etLastName.setText(lname)
+                            etCountry.setText(address.country)
+                            etState.setText(address.state)
+                            etDistrict.setText(address.district)
+                            etCity.setText(address.cityOrVillage)
+                            etRegisteredNumber.setText(mobileNumber)
                         }
                     }
                 }
@@ -138,8 +138,8 @@ class NewComplaintFragment : Fragment() {
         database.reference.child(COMPLAINTS).child(key!!).setValue(complaint)
             .addOnCompleteListener { uploadComplaintTask ->
                 if (uploadComplaintTask.isSuccessful) {
-//                    linkToComplaintsByLocations(key)
-//                    linkToUser(key)
+                    linkToComplaintsByLocations(key)
+                    linkToUser(key)
                     onComplaintSubmittedSuccessfully()
                 } else {
                     onComplaintSubmissionFailure()
@@ -176,7 +176,7 @@ class NewComplaintFragment : Fragment() {
 
     private fun linkToUser(key: String?) {
         database.reference.child(USERS).child(auth.uid!!)
-            .child(COMPLAINTS).child(Date().time.toString())
+            .child(COMPLAINTS).child(complaint.date)
             .setValue(key)
             .addOnCompleteListener { userLinkTask ->
                 if (userLinkTask.isSuccessful) {
@@ -189,7 +189,6 @@ class NewComplaintFragment : Fragment() {
                         TAG,
                         "submitComplaint: linked to user failure"
                     )
-                    onComplaintSubmissionFailure()
                 }
             }
     }
@@ -200,6 +199,7 @@ class NewComplaintFragment : Fragment() {
             .child(complaint.address.state)
             .child(complaint.address.district)
             .child(complaint.address.cityOrVillage)
+            .child(complaint.date)
             .setValue(key)
             .addOnCompleteListener { byLocationTask ->
                 if (byLocationTask.isSuccessful)
@@ -212,7 +212,6 @@ class NewComplaintFragment : Fragment() {
                         TAG,
                         "submitComplaint: linked to location wise failed"
                     )
-                    onComplaintSubmissionFailure()
                 }
             }
     }
@@ -248,7 +247,7 @@ class NewComplaintFragment : Fragment() {
     private fun initialiseDialog() {
         dialog = ProgressDialog(activity)
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
-        dialog.setTitle("Loading data")
+        dialog.setTitle("Uploading data")
         dialog.setMessage("Please wait...")
         dialog.setCancelable(false)
     }
@@ -286,8 +285,6 @@ class NewComplaintFragment : Fragment() {
                 data.data?.let {
                     imagesUris.add(it)
                     binding.rvSelectImage.adapter?.notifyDataSetChanged()
-//                    val viewHeight: Int = 150 * imagesUris.size
-//                    binding.rvSelectImage.layoutParams.height = viewHeight
                 }
             }
         }

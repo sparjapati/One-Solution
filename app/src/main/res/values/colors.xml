@@ -10,4 +10,6 @@
 
     <color name="colorSnackbarError">#F72400</color>
     <color name="colorSnackbarSuccess">#8BC34A</color>
+    <color name="nitkkr_logo">#C114CA</color>
+    <color name="update_profile">#1A1ADA</color>
 </resources>

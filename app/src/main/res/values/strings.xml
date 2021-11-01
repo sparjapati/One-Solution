@@ -63,4 +63,7 @@
     <string name="nikita_name">Nikita</string>
     <string name="sanjay_email">vermasanjay15907@gmail.com</string>
     <string name="nitkkr_logo">NITKKR Logo</string>
+    <string name="save">Save</string>
+    <string name="about_us">About Us</string>
+    <string name="update_your_profile">Update Your Profile</string>
 </resources>

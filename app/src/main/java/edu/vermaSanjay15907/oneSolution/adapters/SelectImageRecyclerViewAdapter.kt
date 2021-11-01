@@ -16,7 +16,7 @@ class SelectImageRecyclerViewAdapter(
 ) : RecyclerView.Adapter<SelectImageRecyclerViewAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        public val binding = NewComplaintSelectedImageListItemBinding.bind(itemView)
+        val binding = NewComplaintSelectedImageListItemBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

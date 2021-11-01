@@ -12,6 +12,7 @@ object Konstants {
     const val TAG = "parjapat"
     const val STATUS_PENDING = "status_pending"
     const val STATUS_SOLVED = "status_solved"
+    const val DETAILS_OK = "details_ok"
     const val USERS = "users"
     const val COMPLAINTS = "complaints"
     const val COMPLAINT_IMAGES = "complaint_images"
@@ -31,5 +32,22 @@ object Konstants {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-
+    fun showSnackBar(
+        activity: Activity,
+        message: String,
+        isError: Boolean = true
+    ) {
+        val snackBar =
+            Snackbar.make(
+                activity.findViewById(android.R.id.content),
+                message,
+                Snackbar.LENGTH_LONG
+            )
+        val color = if (isError)
+            ContextCompat.getColor(activity, R.color.colorSnackbarError)
+        else
+            ContextCompat.getColor(activity, R.color.colorSnackbarSuccess)
+        snackBar.view.setBackgroundColor(color)
+        snackBar.show()
+    }
 }

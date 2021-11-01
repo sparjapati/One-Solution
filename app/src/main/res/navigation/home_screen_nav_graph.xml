@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="edu.vermaSanjay15907.oneSolution.fragments.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="All Complaints">
         <action
             android:id="@+id/action_homeFragment_to_newComplaintFragment"
             app:destination="@id/newComplaintFragment"
@@ -48,4 +48,16 @@
         android:name="edu.vermaSanjay15907.oneSolution.fragments.AboutUsFragment"
         android:label="About Us"
         tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="edu.vermaSanjay15907.oneSolution.fragments.EditProfileFragment"
+        android:label="@string/update_your_profile">
+        <action
+            android:id="@+id/action_editProfileFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/entering_anim"
+            app:exitAnim="@anim/exiting_anim"
+            app:popEnterAnim="@anim/pop_entering_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
+    </fragment>
 </navigation>
