@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
                     if (currUser.isOfficer) {
                         getOfficerComplaints(currUser, complaints, homeActivityComplaintListAdapter)
                     } else
-                        getUserComplaints(complaints, homeActivityComplaintListAdapter)
+                    getUserComplaints(complaints, homeActivityComplaintListAdapter)
 
                 }
 
@@ -89,6 +89,22 @@ class HomeFragment : Fragment() {
         complaints: ArrayList<Complaint>,
         homeActivityComplaintListAdapter: HomeActivityComplaintListAdapter?
     ) {
+//        database.reference.child(COMPLAINTS).addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                for (dataSnapshot in snapshot.children) {
+//                    val complaint = dataSnapshot.getValue(Complaint::class.java)
+//                    if (complaint != null) {
+//                        complaints.add(complaint)
+//                        homeActivityComplaintListAdapter?.notifyDataSetChanged()
+//                    }
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+
         database.reference.child(USERS).child(auth.uid!!).child(COMPLAINTS)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(complaintsIdSnapshot: DataSnapshot) {

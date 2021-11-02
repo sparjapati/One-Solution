@@ -68,4 +68,6 @@
     <string name="update_your_profile">Update Your Profile</string>
     <string name="attach_more_document">Attach More Document</string>
     <string name="add_these_photos">Add these Photos</string>
+    <string name="work_photos">Submitted Photos</string>
+    <string name="no_work_has_been_done">No work has been done</string>
 </resources>

@@ -10,7 +10,8 @@ data class Complaint(
     var address: Address = Address(),
     var date: String = "",
 //    var images: ArrayList<String> = ArrayList(),
-    var images: String = "",
+    var submittedImages: String = "",
+    var workImages: String = "",
     var status: String = STATUS_PENDING,
     var description: String = "",
     var complaintId: String = ""

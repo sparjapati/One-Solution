@@ -50,8 +50,8 @@ class HomeActivityComplaintListAdapter(
 //                            Picasso.get().load(complaint.images[0])
 //                                .placeholder(R.drawable.placeholder)
 //                                .into(holder.complaintPhoto)
-                        if (complaint.images != "") {
-                            Picasso.get().load(complaint.images)
+                        if (complaint.submittedImages != "") {
+                            Picasso.get().load(complaint.submittedImages)
                                 .placeholder(R.drawable.placeholder)
                                 .into(holder.binding.ivComplaintPhoto)
                         }

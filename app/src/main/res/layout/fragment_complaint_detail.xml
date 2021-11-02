@@ -76,29 +76,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/labelComplaintBy" />
 
             <TextView
-            android:id="@+id/tvComplaintAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:gravity="center_horizontal|center_vertical"
-            android:maxWidth="@dimen/complaint_detail_fields_max_width"
-            android:text="@string/address"
-            app:layout_constraintBottom_toBottomOf="@+id/labelComplaintAddress"
-            app:layout_constraintEnd_toStartOf="@+id/btnLocateMe"
-            app:layout_constraintTop_toTopOf="@+id/labelComplaintAddress"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                android:id="@+id/tvComplaintAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:maxWidth="@dimen/complaint_detail_fields_max_width"
+                android:text="@string/address"
+                app:layout_constraintBottom_toBottomOf="@+id/labelComplaintAddress"
+                app:layout_constraintEnd_toStartOf="@+id/btnLocateMe"
+                app:layout_constraintTop_toTopOf="@+id/labelComplaintAddress"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
             <ImageButton
-            android:id="@+id/btnLocateMe"
-            android:layout_width="32dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/locate_me_desc"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/tvComplaintAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvComplaintAddress"
-            app:srcCompat="@drawable/ic_locate"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck" />
+                android:id="@+id/btnLocateMe"
+                android:layout_width="32dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/locate_me_desc"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/tvComplaintAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvComplaintAddress"
+                app:srcCompat="@drawable/ic_locate"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck" />
 
             <TextView
                 android:id="@+id/labelComplaintDescription"
@@ -137,31 +137,89 @@
                 app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
                 app:layout_constraintTop_toBottomOf="@+id/labelComplaintDescription" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvImages"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/submittedImagesConstraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="5dp"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
-                app:layout_constraintTop_toBottomOf="@+id/labelComplaintPhotos" />
+                app:layout_constraintTop_toBottomOf="@+id/labelComplaintPhotos">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/tvNoPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/noImageUploaded"
+                    android:visibility="gone"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.50"
+                    app:layout_constraintStart_toStartOf="@+id/rvImages"
+                    app:layout_constraintTop_toTopOf="@+id/rvImages"
+                    app:layout_constraintBottom_toBottomOf="@id/rvImages"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/tvNoPhoto"
+                android:id="@+id/labelWorkComplaintPhotos"
+                style="@style/complaint_fragment_label_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/noImageUploaded"
-                android:textSize="24sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toStartOf="@+id/rvImages"
-                app:layout_constraintTop_toTopOf="@+id/rvImages" />
+                android:layout_marginTop="16dp"
+                android:text="@string/work_photos"
+                android:textColor="#2E7D32"
+                app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
+                app:layout_constraintTop_toBottomOf="@+id/submittedImagesConstraintLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/workDoneImagesConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/labelWorkComplaintPhotos">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvWorkImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvNoWorkPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/no_work_has_been_done"
+                    android:textSize="24sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintStart_toStartOf="@+id/rvWorkImages"
+                    app:layout_constraintBottom_toBottomOf="@+id/rvWorkImages"
+                    app:layout_constraintTop_toTopOf="@+id/rvWorkImages" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/labelAddComplaintPhotos"
@@ -171,9 +229,8 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/attach_more_document"
                 android:textColor="#2E7D32"
-                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/tvIsSolved"
-                app:layout_constraintTop_toBottomOf="@+id/rvImages" />
+                app:layout_constraintTop_toBottomOf="@+id/workDoneImagesConstraintLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -192,7 +249,6 @@
                     android:contentDescription="@string/complaint_photos"
                     android:scaleType="centerCrop"
                     android:src="@drawable/placeholder"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -209,7 +265,6 @@
                     android:contentDescription="@string/add_a_new_photo"
                     android:focusable="true"
                     android:src="@drawable/ic_add"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/ivImages"
                     app:layout_constraintEnd_toEndOf="@+id/ivImages"
                     app:layout_constraintStart_toStartOf="@+id/ivImages"
@@ -223,7 +278,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                 tools:layout_editor_absoluteX="0dp" />
 
@@ -233,7 +287,6 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:text="@string/add_these_photos"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

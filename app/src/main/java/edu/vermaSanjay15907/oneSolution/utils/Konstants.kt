@@ -26,8 +26,7 @@ object Konstants {
     const val COMPLAINTS_BY_LOCATIONS = "complaints_by_locations"
     const val PROFILE_DETAILS = "profile_details"
     const val GET_IMAGE_REQUEST_CODE = 100
-    const val INITIAL_DOCUMENTS = "initial_documents"
-    const val WORK_DOCUMENTS = "work_documents"
+    const val WORK_DOCUMENTS = "workImages"
 
     val databaseReference by lazy {
         FirebaseDatabase.getInstance().reference
@@ -75,7 +74,7 @@ object Konstants {
     }
 
     val initialImagesReference by lazy {
-        complaintsImagesReference.child(INITIAL_DOCUMENTS)
+        complaintsImagesReference.child(COMPLAINT_IMAGES)
     }
 
     val workDocumentReference by lazy {

@@ -112,7 +112,7 @@ class NewComplaintFragment : Fragment() {
             if (imagesUris.size > 0) {
                 val image = imagesUris[0]
                 val imageReference =
-                    storage.reference.child(COMPLAINT_IMAGES).child(key)
+                    storage.reference.child(COMPLAINT_IMAGES).child(key).child(COMPLAINT_IMAGES)
                         .child(image.lastPathSegment.toString())
 
                 imageReference.putFile(image)
@@ -121,7 +121,7 @@ class NewComplaintFragment : Fragment() {
                             Log.d(TAG, "submitComplaint: image uploaded")
                             imageReference.downloadUrl.addOnSuccessListener { urlUri ->
                                 Log.d(TAG, "submitComplaint: $urlUri")
-                                complaint.images = urlUri.toString()
+                                complaint.submittedImages = urlUri.toString()
                                 uploadComplaint(key)
                             }
                         } else {
@@ -138,8 +138,8 @@ class NewComplaintFragment : Fragment() {
         database.reference.child(COMPLAINTS).child(key!!).setValue(complaint)
             .addOnCompleteListener { uploadComplaintTask ->
                 if (uploadComplaintTask.isSuccessful) {
-                    linkToComplaintsByLocations(key)
-                    linkToUser(key)
+//                    linkToComplaintsByLocations(key)
+//                    linkToUser(key)
                     onComplaintSubmittedSuccessfully()
                 } else {
                     onComplaintSubmissionFailure()
