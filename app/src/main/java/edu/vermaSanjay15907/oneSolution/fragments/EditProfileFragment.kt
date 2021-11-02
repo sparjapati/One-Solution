@@ -56,39 +56,36 @@ class EditProfileFragment : Fragment() {
 
     private fun updateUserDetails() {
         val newUserDetails = getUserDetails()
-        val currUser =
-            FirebaseAuth.getInstance().uid?.let {
-                FirebaseDatabase.getInstance().reference.child(USERS).child(it).child(
-                    PROFILE_DETAILS
-                ).addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val currUser = snapshot.getValue(User::class.java)
-                        if (currUser != null) {
-                            newUserDetails.isOfficer = currUser.isOfficer
-                            FirebaseDatabase.getInstance().reference.child(USERS).child(it).child(
-                                PROFILE_DETAILS
-                            ).setValue(newUserDetails).addOnCompleteListener { updateTask ->
-                                if (updateTask.isSuccessful) {
-                                    onUpdateSuccessfully()
-                                } else {
-                                    activity?.let { it1 ->
-                                        showSnackBar(
-                                            it1,
-                                            "Some Error Occurred while updating your profile"
-                                        )
-                                    }
+        FirebaseAuth.getInstance().uid?.let {
+            FirebaseDatabase.getInstance().reference.child(USERS).child(it).child(
+                PROFILE_DETAILS
+            ).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val currUser = snapshot.getValue(User::class.java)
+                    if (currUser != null) {
+                        newUserDetails.isOfficer = currUser.isOfficer
+                        FirebaseDatabase.getInstance().reference.child(USERS).child(it).child(
+                            PROFILE_DETAILS
+                        ).setValue(newUserDetails).addOnCompleteListener { updateTask ->
+                            if (updateTask.isSuccessful) {
+                                onUpdateSuccessfully()
+                            } else {
+                                activity?.let { it1 ->
+                                    showSnackBar(
+                                        it1,
+                                        "Some Error Occurred while updating your profile"
+                                    )
                                 }
                             }
                         }
                     }
+                }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
-            }
-
-
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
         onUpdateSuccessfully()
     }
 

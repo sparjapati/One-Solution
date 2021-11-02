@@ -112,7 +112,7 @@ class NewComplaintFragment : Fragment() {
             if (imagesUris.size > 0) {
                 val image = imagesUris[0]
                 val imageReference =
-                    storage.reference.child(COMPLAINT_IMAGES).child(auth.uid!!)
+                    storage.reference.child(COMPLAINT_IMAGES).child(key)
                         .child(image.lastPathSegment.toString())
 
                 imageReference.putFile(image)

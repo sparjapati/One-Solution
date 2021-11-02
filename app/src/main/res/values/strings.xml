@@ -66,4 +66,6 @@
     <string name="save">Save</string>
     <string name="about_us">About Us</string>
     <string name="update_your_profile">Update Your Profile</string>
+    <string name="attach_more_document">Attach More Document</string>
+    <string name="add_these_photos">Add these Photos</string>
 </resources>

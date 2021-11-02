@@ -5,7 +5,14 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import edu.vermaSanjay15907.oneSolution.R
+import edu.vermaSanjay15907.oneSolution.models.User
 
 
 object Konstants {
@@ -19,6 +26,61 @@ object Konstants {
     const val COMPLAINTS_BY_LOCATIONS = "complaints_by_locations"
     const val PROFILE_DETAILS = "profile_details"
     const val GET_IMAGE_REQUEST_CODE = 100
+    const val INITIAL_DOCUMENTS = "initial_documents"
+    const val WORK_DOCUMENTS = "work_documents"
+
+    val databaseReference by lazy {
+        FirebaseDatabase.getInstance().reference
+    }
+
+    val complaintsReference by lazy {
+        databaseReference.child(COMPLAINTS)
+    }
+
+    val complaintByLocationReference by lazy {
+        databaseReference.child(COMPLAINTS_BY_LOCATIONS)
+    }
+
+    val usersReference by lazy {
+        databaseReference.child(USERS)
+    }
+
+    val auth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
+    val currUser by lazy {
+        var user: User? = null
+        auth.uid?.let {
+            usersReference.child(it).child(PROFILE_DETAILS)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        user = snapshot.getValue(User::class.java)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+        }
+        user
+    }
+
+    val storageReference by lazy {
+        FirebaseStorage.getInstance().reference
+    }
+
+    val complaintsImagesReference by lazy {
+        storageReference.child(COMPLAINT_IMAGES)
+    }
+
+    val initialImagesReference by lazy {
+        complaintsImagesReference.child(INITIAL_DOCUMENTS)
+    }
+
+    val workDocumentReference by lazy {
+        complaintsImagesReference.child(WORK_DOCUMENTS)
+    }
 
     fun hideKeyboard(activity: Activity) {
         val imm: InputMethodManager =
@@ -51,3 +113,12 @@ object Konstants {
         snackBar.show()
     }
 }
+
+//fun View.isUserInteractionEnabled(enabled: Boolean) {
+//    isUserInteractionEnabled(enabled)
+//    if (this is ViewGroup && this.childCount > 0) {
+//        this.children.forEach {
+//            it.isUserInteractionEnabled(enabled)
+//        }
+//    }
+//}
