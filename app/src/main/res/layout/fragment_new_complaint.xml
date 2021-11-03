@@ -16,37 +16,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tvRegisterNow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/register_a_new_complaint"
-                android:textColor="#BC1396"
-                android:textSize="34sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TextContrastCheck" />
+            android:orientation="vertical"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tvRegisterNow"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tvRegisterNow"
-                app:layout_constraintTop_toBottomOf="@+id/tvRegisterNow">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
                     style="@style/et_style"
                     android:layout_width="match_parent"
+                    android:focusable="false"
                     android:hint="@string/first_name"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -55,15 +39,12 @@
                 android:id="@+id/tilLastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tilFirstName"
-                app:layout_constraintTop_toBottomOf="@+id/tilFirstName">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
                     style="@style/et_style"
+                    android:focusable="false"
                     android:hint="@string/last_name"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -72,14 +53,12 @@
                 android:id="@+id/tilGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
-                app:layout_constraintStart_toStartOf="@+id/tilFirstName"
-                app:layout_constraintTop_toBottomOf="@+id/tilLastName">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCountry"
                     style="@style/et_style"
+                    android:focusable="false"
                     android:hint="@string/country"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -88,15 +67,12 @@
                 android:id="@+id/tilState"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilGender"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tilGender"
-                app:layout_constraintTop_toBottomOf="@+id/tilGender">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etState"
                     style="@style/et_style"
+                    android:focusable="false"
                     android:hint="@string/state"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,15 +81,12 @@
                 android:id="@+id/tilDistrict"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilState"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tilState"
-                app:layout_constraintTop_toBottomOf="@+id/tilState">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDistrict"
                     style="@style/et_style"
+                    android:focusable="false"
                     android:hint="@string/district"
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -122,10 +95,7 @@
                 android:id="@+id/tilCityOrVillage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
-                app:layout_constraintStart_toStartOf="@+id/tilFirstName"
-                app:layout_constraintTop_toBottomOf="@+id/tilDistrict">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCity"
@@ -138,10 +108,7 @@
                 android:id="@+id/tilNearbyLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
-                app:layout_constraintStart_toStartOf="@+id/tilFirstName"
-                app:layout_constraintTop_toBottomOf="@+id/tilCityOrVillage">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNearByLocation"
@@ -154,10 +121,7 @@
                 android:id="@+id/textInputLayout9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
-                app:layout_constraintStart_toStartOf="@+id/tilFirstName"
-                app:layout_constraintTop_toBottomOf="@+id/tilNearbyLocation">
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDescription"
@@ -172,10 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:hint="@string/mobile_number"
-                app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
-                app:layout_constraintStart_toStartOf="@+id/tilFirstName"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9">
+                android:hint="@string/mobile_number">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRegisteredNumber"
@@ -198,12 +159,12 @@
                     android:alpha="0.4"
                     android:contentDescription="@string/complaint_photos"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/placeholder"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ImageContrastCheck"
-                    android:src="@drawable/placeholder" />
+                    tools:ignore="ImageContrastCheck" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/btnAddImage"
@@ -224,13 +185,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSelectImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/btnSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:nestedScrollingEnabled="false"
                 android:text="@string/submit_complaint"
                 tools:ignore="SpeakableTextPresentCheck" />
 

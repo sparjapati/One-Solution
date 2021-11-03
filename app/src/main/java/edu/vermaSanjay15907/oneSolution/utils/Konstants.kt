@@ -27,6 +27,9 @@ object Konstants {
     const val PROFILE_DETAILS = "profile_details"
     const val GET_IMAGE_REQUEST_CODE = 100
     const val WORK_DOCUMENTS = "workImages"
+    const val DEFAULT_STATE = "Select Your State"
+    const val DEFAULT_DISTRICT = "Select Your District"
+    const val BLANK = ""
 
     val databaseReference by lazy {
         FirebaseDatabase.getInstance().reference

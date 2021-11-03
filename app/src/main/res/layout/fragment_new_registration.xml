@@ -76,28 +76,28 @@
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/radio_selector"
                     android:button="@android:color/transparent"
                     android:elevation="4dp"
-                    android:layout_weight="1"
-                    android:padding="6dp"
                     android:gravity="center"
-                    android:textSize="22sp"
+                    android:padding="6dp"
                     android:text="Male"
-                    android:textColor="@drawable/text_color" />
+                    android:textColor="@drawable/text_color"
+                    android:textSize="22sp" />
 
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@drawable/radio_selector"
                     android:button="@android:color/transparent"
                     android:elevation="4dp"
-                    android:padding="6dp"
-                    android:textSize="22sp"
                     android:gravity="center"
-                    android:layout_weight="1"
+                    android:padding="6dp"
                     android:text="Female"
-                    android:textColor="@drawable/text_color" />
+                    android:textColor="@drawable/text_color"
+                    android:textSize="22sp" />
 
             </RadioGroup>
 
@@ -120,40 +120,31 @@
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilState"
+            <Spinner
+                android:id="@+id/spState"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:background="@drawable/et_bg"
+                android:minHeight="48dp"
+                android:tooltipText="Select Your Country"
                 app:layout_constraintEnd_toEndOf="@+id/tilCountry"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/tilCountry"
-                app:layout_constraintTop_toBottomOf="@+id/tilCountry">
+                app:layout_constraintTop_toBottomOf="@+id/tilCountry"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etState"
-                    style="@style/et_style"
-                    android:hint="@string/state"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilDistrict"
+            <Spinner
+                android:id="@+id/spDistrict"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilState"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tilState"
-                app:layout_constraintTop_toBottomOf="@+id/tilState">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDistrict"
-                    style="@style/et_style"
-                    android:hint="@string/district"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/et_bg"
+                android:minHeight="48dp"
+                app:layout_constraintEnd_toEndOf="@+id/spState"
+                app:layout_constraintStart_toStartOf="@+id/spState"
+                app:layout_constraintTop_toBottomOf="@+id/spState"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCityOrVillage"
@@ -162,7 +153,7 @@
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
                 app:layout_constraintStart_toStartOf="@+id/tilFirstName"
-                app:layout_constraintTop_toBottomOf="@+id/tilDistrict">
+                app:layout_constraintTop_toBottomOf="@+id/spDistrict">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCity"
