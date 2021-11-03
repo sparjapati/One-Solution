@@ -1,6 +1,7 @@
 package edu.vermaSanjay15907.oneSolution.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
@@ -32,6 +33,7 @@ import edu.vermaSanjay15907.oneSolution.utils.Konstants.GET_IMAGE_REQUEST_CODE
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.showSnackBar
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -42,6 +44,7 @@ class NewComplaintFragment : Fragment() {
     private var complaint = Complaint()
     private var imagesUris = ArrayList<Uri>()
     private var imagesUrls = ArrayList<String>()
+    private lateinit var activity: Activity
     private lateinit var dialog: ProgressDialog
 
     private lateinit var auth: FirebaseAuth
@@ -62,22 +65,38 @@ class NewComplaintFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
+        activity = requireActivity()
 
         initialiseDialog()
         setImageRecyclerViewAdapter()
 
-        binding.btnAddImage.setOnClickListener {
-            getImages()
-        }
-        binding.btnSubmit.setOnClickListener {
-            dialog.show()
-            binding.btnSubmit.isEnabled = false
-            extractComplaintDetails()
-            submitComplaint()
+        binding.apply {
+            btnAddImage.setOnClickListener {
+                getImages()
+            }
+            btnSubmit.setOnClickListener {
+                dialog.show()
+                binding.btnSubmit.isEnabled = false
+                extractComplaintDetails()
+                submitComplaint()
+            }
+            etFirstName.setOnClickListener { immutableField() }
+            etLastName.setOnClickListener { immutableField() }
+            etCountry.setOnClickListener { immutableField() }
+            etState.setOnClickListener { immutableField() }
+            etDistrict.setOnClickListener { immutableField() }
         }
 
         setInitialData()
         return binding.root
+    }
+
+    public fun immutableField() {
+        showSnackBar(
+            activity,
+            "Sorry, You can't change this field, It's value is referenced from your profile",
+            true
+        )
     }
 
     private fun setInitialData() {
