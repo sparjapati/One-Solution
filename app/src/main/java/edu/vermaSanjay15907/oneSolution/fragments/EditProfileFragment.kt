@@ -1,6 +1,7 @@
 package edu.vermaSanjay15907.oneSolution.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -15,7 +16,6 @@ import edu.vermaSanjay15907.oneSolution.R
 import edu.vermaSanjay15907.oneSolution.databinding.FragmentEditProfileBinding
 import edu.vermaSanjay15907.oneSolution.models.User
 import edu.vermaSanjay15907.oneSolution.utils.Konstants
-import edu.vermaSanjay15907.oneSolution.utils.Konstants.DETAILS_OK
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.showSnackBar
@@ -24,11 +24,14 @@ class EditProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentEditProfileBinding
 
+    private lateinit var activity: Activity
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditProfileBinding.inflate(layoutInflater, container, false)
+        activity = requireActivity()
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -41,14 +44,8 @@ class EditProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.btnSave -> {
-                val res = validateDetails()
-                if (res == DETAILS_OK) {
-                    activity?.let { showSnackBar(it, res, false) }
-                    item.isEnabled = false
+                if (validateDetails())
                     updateUserDetails()
-                } else {
-                    activity?.let { showSnackBar(it, res, true) }
-                }
             }
         }
         return true
@@ -70,12 +67,10 @@ class EditProfileFragment : Fragment() {
                             if (updateTask.isSuccessful) {
                                 onUpdateSuccessfully()
                             } else {
-                                activity?.let { it1 ->
-                                    showSnackBar(
-                                        it1,
-                                        "Some Error Occurred while updating your profile"
-                                    )
-                                }
+                                showSnackBar(
+                                    activity,
+                                    "Some Error Occurred while updating your profile"
+                                )
                             }
                         }
                     }
@@ -87,6 +82,38 @@ class EditProfileFragment : Fragment() {
             })
         }
         onUpdateSuccessfully()
+    }
+
+    private fun validateDetails(): Boolean {
+        binding.apply {
+            val BLANK = ""
+            if (etFirstName.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter First Name", true)
+                etFirstName.requestFocus()
+                return false
+            }
+            if (etLastName.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Last Name", true)
+                etLastName.requestFocus()
+                return false
+            }
+            if (etState.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Your state", true)
+                etState.requestFocus()
+                return false
+            }
+            if (etDistrict.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Your district", true)
+                etDistrict.requestFocus()
+                return false
+            }
+            if (etCity.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Your city/village name", true)
+                etCity.requestFocus()
+                return false
+            }
+        }
+        return true
     }
 
     private fun getUserDetails(): User {
@@ -124,10 +151,5 @@ class EditProfileFragment : Fragment() {
                 }
             }
         }
-    }
-
-
-    private fun validateDetails(): String {
-        return DETAILS_OK
     }
 }

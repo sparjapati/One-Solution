@@ -17,6 +17,7 @@ import edu.vermaSanjay15907.oneSolution.models.User
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.showSnackBar
 
 class NewRegistrationFragment : Fragment() {
     private lateinit var binding: FragmentNewRegistrationBinding
@@ -36,12 +37,46 @@ class NewRegistrationFragment : Fragment() {
         binding.etRegisteredNumber.setText(phoneNumber)
 
         binding.btnSignUp.setOnClickListener {
-            binding.btnSignUp.isEnabled = false
-            val user = getUserDetails()
-            registerUser(user)
+            if (validateDetails()) {
+                binding.btnSignUp.isEnabled = false
+                val user = getUserDetails()
+                registerUser(user)
+            }
         }
 
         return binding.root
+    }
+
+    private fun validateDetails(): Boolean {
+        binding.apply {
+            val BLANK = ""
+            if (etFirstName.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter First Name", true)
+                etFirstName.requestFocus()
+                return false
+            }
+            if (etLastName.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Last Name", true)
+                etLastName.requestFocus()
+                return false
+            }
+            if (etState.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Your state", true)
+                etState.requestFocus()
+                return false
+            }
+            if (etDistrict.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Your district", true)
+                etDistrict.requestFocus()
+                return false
+            }
+            if (etCity.text.toString() == BLANK) {
+                showSnackBar(activity, "Please Enter Your city/village name", true)
+                etCity.requestFocus()
+                return false
+            }
+        }
+        return true
     }
 
     private fun initialisation(container: ViewGroup?) {

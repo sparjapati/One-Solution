@@ -169,5 +169,5 @@ class LoginFragment : Fragment() {
         binding.etOtp.setTextColor(Color.RED)
     }
 
-
+    
 }
