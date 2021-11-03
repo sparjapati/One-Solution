@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -60,6 +61,10 @@ class NewRegistrationFragment : Fragment() {
                 etLastName.requestFocus()
                 return false
             }
+            if (rgGender.checkedRadioButtonId == -1) {
+                showSnackBar(activity, "Please Select Your Gender", true)
+                return false
+            }
             if (etState.text.toString() == BLANK) {
                 showSnackBar(activity, "Please Enter Your state", true)
                 etState.requestFocus()
@@ -92,7 +97,8 @@ class NewRegistrationFragment : Fragment() {
             user.fname = etFirstName.text.toString()
             user.lname = etLastName.text.toString()
             user.mobileNumber = etRegisteredNumber.text.toString()
-            user.gender = etGender.text.toString()
+            user.gender =
+                rgGender.findViewById<RadioButton>(rgGender.checkedRadioButtonId).text.toString()
             user.address.country = "India"
             user.address.state = etState.text.toString()
             user.address.district = etDistrict.text.toString()

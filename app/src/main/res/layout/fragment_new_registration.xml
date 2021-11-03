@@ -63,31 +63,53 @@
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilGender"
+            <RadioGroup
+                android:id="@+id/rgGender"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/tilFirstName"
                 app:layout_constraintStart_toStartOf="@+id/tilFirstName"
                 app:layout_constraintTop_toBottomOf="@+id/tilLastName">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etGender"
-                    style="@style/et_style"
-                    android:hint="@string/gender"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:layout_weight="1"
+                    android:padding="6dp"
+                    android:gravity="center"
+                    android:textSize="22sp"
+                    android:text="Male"
+                    android:textColor="@drawable/text_color" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="6dp"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Female"
+                    android:textColor="@drawable/text_color" />
+
+            </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCountry"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/tilGender"
+                app:layout_constraintEnd_toEndOf="@+id/rgGender"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tilGender"
-                app:layout_constraintTop_toBottomOf="@+id/tilGender">
+                app:layout_constraintStart_toStartOf="@+id/rgGender"
+                app:layout_constraintTop_toBottomOf="@+id/rgGender">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCountry"
@@ -236,7 +258,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view"
                 tools:ignore="TextContrastCheck" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
