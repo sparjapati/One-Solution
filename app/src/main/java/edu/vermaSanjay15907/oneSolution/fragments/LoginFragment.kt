@@ -163,6 +163,7 @@ class LoginFragment : Fragment() {
     private fun navigateToHomeFragment() {
         val intent = Intent(activity, HomeActivity::class.java)
         startActivity(intent)
+        activity.finish()
     }
 
     private fun onInvalidOtpEntered() {

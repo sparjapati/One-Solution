@@ -114,7 +114,6 @@ class ComplaintDetailFragment : Fragment() {
                                 }
 
                                 override fun onCancelled(error: DatabaseError) {
-                                    TODO("Not yet implemented")
                                 }
                             })
 
@@ -142,7 +141,6 @@ class ComplaintDetailFragment : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
 
@@ -266,7 +264,6 @@ class ComplaintDetailFragment : Fragment() {
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
                 }
             }
 
@@ -326,7 +323,6 @@ class ComplaintDetailFragment : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
     }

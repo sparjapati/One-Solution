@@ -3,12 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/editProfileFragment"
+        android:title="Edit Your Profile" />
+    <item
+        android:id="@+id/aboutFragment"
+        android:title="@string/about_us" />
+    <item
         android:id="@+id/miSignOut"
         android:enabled="true"
         android:icon="@drawable/ic_logout"
         android:title="@string/sign_out"
         android:visible="true" />
-    <item
-        android:id="@+id/aboutFragment"
-        android:title="About Us" />
 </menu>

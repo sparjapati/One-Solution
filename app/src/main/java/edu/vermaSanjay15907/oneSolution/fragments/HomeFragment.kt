@@ -58,12 +58,11 @@ class HomeFragment : Fragment() {
                     if (currUser.isOfficer) {
                         getOfficerComplaints(currUser, complaints, homeActivityComplaintListAdapter)
                     } else
-                    getUserComplaints(complaints, homeActivityComplaintListAdapter)
+                        getUserComplaints(complaints, homeActivityComplaintListAdapter)
 
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
 
@@ -101,7 +100,6 @@ class HomeFragment : Fragment() {
 //            }
 //
 //            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
 //            }
 //        })
 
@@ -114,7 +112,8 @@ class HomeFragment : Fragment() {
                         FirebaseDatabase.getInstance().reference.child(COMPLAINTS).child(cid)
                             .addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onDataChange(complaintSnapshot: DataSnapshot) {
-                                    val complaint = complaintSnapshot.getValue(Complaint::class.java)
+                                    val complaint =
+                                        complaintSnapshot.getValue(Complaint::class.java)
                                     if (complaint != null) {
                                         complaints.add(complaint)
                                         homeActivityComplaintListAdapter?.notifyDataSetChanged()
@@ -122,14 +121,12 @@ class HomeFragment : Fragment() {
                                 }
 
                                 override fun onCancelled(error: DatabaseError) {
-                                    TODO("Not yet implemented")
                                 }
                             })
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
     }
@@ -159,7 +156,6 @@ class HomeFragment : Fragment() {
                                         }
 
                                         override fun onCancelled(error: DatabaseError) {
-                                            TODO("Not yet implemented")
                                         }
                                     })
                         }
@@ -188,6 +184,12 @@ class HomeFragment : Fragment() {
                 return true
             }
             R.id.aboutFragment -> {
+                return NavigationUI.onNavDestinationSelected(
+                    item,
+                    requireView().findNavController()
+                )
+            }
+            R.id.editProfileFragment -> {
                 return NavigationUI.onNavDestinationSelected(
                     item,
                     requireView().findNavController()
