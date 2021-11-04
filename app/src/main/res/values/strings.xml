@@ -114,6 +114,12 @@
     <string-array name="array_default_districts">
         <item>Select Your District</item>
     </string-array>
+
+    <string-array name="complaint_status">
+        <item>Pending</item>
+        <item>Solved</item>
+    </string-array>
+
     <string-array name="array_andhra_pradesh_districts">
         <item>Select Your District</item>
         <item>Anantapur</item>

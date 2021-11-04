@@ -28,14 +28,26 @@
                 android:id="@+id/ivStatus"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="5dp"
                 android:contentDescription="@string/locate_me_button"
                 android:src="@drawable/yellow"
                 app:layout_constraintBottom_toBottomOf="@+id/tvIsSolved"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/spChangeStatus"
                 app:layout_constraintTop_toTopOf="@+id/tvIsSolved"
+                app:layout_constraintVertical_bias="0.307"
                 app:riv_corner_radius="10dp"
                 tools:ignore="ImageContrastCheck,RedundantDescriptionCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spChangeStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvIsSolved"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvIsSolved"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/labelComplaintBy"
@@ -224,6 +236,7 @@
             <TextView
                 android:id="@+id/labelAddComplaintPhotos"
                 style="@style/complaint_fragment_label_style"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -236,6 +249,7 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_gravity="center_horizontal"
                 app:layout_constraintTop_toBottomOf="@id/labelAddComplaintPhotos"
                 tools:layout_editor_absoluteX="5dp">
@@ -276,6 +290,7 @@
                 android:id="@+id/rvSelectImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                 tools:layout_editor_absoluteX="0dp" />
@@ -289,6 +304,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/rvSelectImage"
                 tools:ignore="SpeakableTextPresentCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>

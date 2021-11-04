@@ -2,7 +2,10 @@ package edu.vermaSanjay15907.oneSolution.fragments
 
 import android.R
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +13,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,10 +34,12 @@ import edu.vermaSanjay15907.oneSolution.utils.Konstants
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINTS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINT_IMAGES
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.STATUS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.STATUS_SOLVED
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.WORK_DOCUMENTS
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.showSnackBar
 import edu.vermaSanjay15907.oneSolution.utils.setAddress
 import edu.vermaSanjay15907.oneSolution.utils.setComplaintStatus
 
@@ -44,6 +51,7 @@ class ComplaintDetailFragment : Fragment() {
     private lateinit var dialog: ProgressDialog
     private var imagesUris = ArrayList<Uri>()
     private var complaint: Complaint? = null
+    private lateinit var activity: Activity
     private lateinit var snackBar: Snackbar
 
     override fun onCreateView(
@@ -52,6 +60,7 @@ class ComplaintDetailFragment : Fragment() {
     ): View {
         binding = FragmentComplaintDetailBinding.inflate(layoutInflater, container, false)
         database = FirebaseDatabase.getInstance()
+        activity = requireActivity()
         initialiseDialog()
 
         val args = arguments?.let { ComplaintDetailFragmentArgs.fromBundle(it) }
@@ -87,12 +96,13 @@ class ComplaintDetailFragment : Fragment() {
                     complaint = complaintSnapshot.getValue(Complaint::class.java)
                     Log.d(TAG, "onDataChange: $complaint")
                     complaint?.apply {
+                        if (status != STATUS_SOLVED)
+                            isOfficerSetup()
+
                         database.reference.child(USERS)
                             .child(complainedBy).child(PROFILE_DETAILS)
                             .addListenerForSingleValueEvent(object : ValueEventListener {
                                 override fun onDataChange(userSnapshot: DataSnapshot) {
-                                    if (complaint!!.status == STATUS_SOLVED)
-                                        isOfficerSetup()
                                     val user =
                                         userSnapshot.getValue(User::class.java)
                                     Log.d(TAG, "onDataChange: $user")
@@ -147,6 +157,10 @@ class ComplaintDetailFragment : Fragment() {
             startActivity(mapIntent)
         }
 
+        binding.tvComplaintAddress.setOnClickListener {
+            //todo copy to clip board
+        }
+
         snackBar = Snackbar.make(
             requireActivity().findViewById(R.id.content),
             "As you are a officer, you can change status of application(by attaching some document)",
@@ -185,8 +199,7 @@ class ComplaintDetailFragment : Fragment() {
                                             ).show()
                                             imagesUris.clear()
                                             selectImageRecyclerViewAdapter.notifyDataSetChanged()
-                                        }
-                                        else
+                                        } else
                                             Log.d(
                                                 TAG,
                                                 "onCreateView: Some error occurred while downloading url"
@@ -214,6 +227,61 @@ class ComplaintDetailFragment : Fragment() {
 
     }
 
+    private fun setChangeStatusSpinnerAdapter() {
+        val adapter = ArrayAdapter.createFromResource(
+            activity,
+            edu.vermaSanjay15907.oneSolution.R.array.complaint_status,
+            edu.vermaSanjay15907.oneSolution.R.layout.spinner_layout
+        )
+
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        binding.spChangeStatus.adapter = adapter
+
+        binding.spChangeStatus.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedStatus = binding.spChangeStatus.selectedItem.toString()
+                    if (selectedStatus == "Solved") {
+                        val confirmationDialog =
+                            AlertDialog.Builder(activity).setTitle("Change Status of Complaint")
+                                .setMessage("Are you sure to change status to Solved?\n(Make sure to contact with complainer if he/she is satisfied or not.)")
+
+                        confirmationDialog.setPositiveButton(
+                            "Yes"
+                        ) { _: DialogInterface, _: Int ->
+                            changeStatusToSolved(complaintId)
+                        }
+                        confirmationDialog.setNegativeButton("No") { _: DialogInterface, _: Int ->
+                            binding.spChangeStatus.setSelection(0)
+                        }
+                        confirmationDialog.show()
+                    }
+                    else
+                        showSnackBar(activity,"You can't change status again to pending!!!")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+            }
+
+    }
+
+    private fun changeStatusToSolved(complaintId: String) {
+        database.reference.child(COMPLAINTS).child(complaintId).child(STATUS)
+            .setValue(STATUS_SOLVED).addOnCompleteListener { task ->
+                if (task.isSuccessful)
+                    showSnackBar(activity, "Changed status successfully", false)
+                else
+                    showSnackBar(activity, "Some Error occurred!!!\nPlease try again", false)
+            }
+    }
+
 
     private fun postSnackBarDismiss() {
         binding.rootLayout.apply {
@@ -238,12 +306,18 @@ class ComplaintDetailFragment : Fragment() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val currUser = snapshot.getValue(User::class.java)
+                    Log.d(TAG, "complaint details: $currUser")
                     if (currUser!!.isOfficer) {
                         preSnackBarDismiss()
+                        setChangeStatusSpinnerAdapter()
                         binding.apply {
+                            spChangeStatus.setOnClickListener {
+                                showSnackBar(activity,"You don't have permission to change status of application",true)
+                            }
                             snackBar.show()
                             labelAddComplaintPhotos.visibility = View.VISIBLE
                             ivImages.visibility = View.VISIBLE
+                            constraintLayout.visibility = View.VISIBLE
                             btnAddImage.visibility = View.VISIBLE
                             rvSelectImage.visibility = View.VISIBLE
                             btnSubmit.visibility = View.VISIBLE
@@ -271,9 +345,6 @@ class ComplaintDetailFragment : Fragment() {
         dialog.setMessage("Please wait...")
         dialog.setCancelable(false)
     }
-
-
-
 
 
     private fun setWorkImageRecyclerViewAdapter() {

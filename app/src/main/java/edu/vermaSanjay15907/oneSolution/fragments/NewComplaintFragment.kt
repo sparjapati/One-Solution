@@ -157,8 +157,8 @@ class NewComplaintFragment : Fragment() {
         database.reference.child(COMPLAINTS).child(key!!).setValue(complaint)
             .addOnCompleteListener { uploadComplaintTask ->
                 if (uploadComplaintTask.isSuccessful) {
-//                    linkToComplaintsByLocations(key)
-//                    linkToUser(key)
+                    linkToComplaintsByLocations(key)
+                    linkToUser(key)
                     onComplaintSubmittedSuccessfully()
                 } else {
                     onComplaintSubmissionFailure()

@@ -17,6 +17,7 @@ import edu.vermaSanjay15907.oneSolution.models.User
 
 object Konstants {
     const val TAG = "parjapat"
+    const val STATUS = "status"
     const val STATUS_PENDING = "status_pending"
     const val STATUS_SOLVED = "status_solved"
     const val DETAILS_OK = "details_ok"

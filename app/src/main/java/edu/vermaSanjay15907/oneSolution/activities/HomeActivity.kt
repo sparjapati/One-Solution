@@ -1,16 +1,12 @@
 package edu.vermaSanjay15907.oneSolution.activities
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import edu.vermaSanjay15907.oneSolution.R
 import edu.vermaSanjay15907.oneSolution.databinding.ActivityHomeBinding
-import edu.vermaSanjay15907.oneSolution.fragments.AboutUsFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
