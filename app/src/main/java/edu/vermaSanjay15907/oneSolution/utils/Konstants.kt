@@ -21,6 +21,7 @@ object Konstants {
     const val STATUS_PENDING = "status_pending"
     const val STATUS_SOLVED = "status_solved"
     const val DETAILS_OK = "details_ok"
+    const val SOLVED_BY = "solvedBy"
     const val USERS = "users"
     const val COMPLAINTS = "complaints"
     const val COMPLAINT_IMAGES = "complaint_images"

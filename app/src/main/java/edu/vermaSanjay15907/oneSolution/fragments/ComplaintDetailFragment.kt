@@ -34,12 +34,14 @@ import edu.vermaSanjay15907.oneSolution.utils.Konstants
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINTS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINT_IMAGES
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.SOLVED_BY
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.STATUS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.STATUS_SOLVED
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.WORK_DOCUMENTS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.showSnackBar
+import edu.vermaSanjay15907.oneSolution.utils.MySpinner
 import edu.vermaSanjay15907.oneSolution.utils.setAddress
 import edu.vermaSanjay15907.oneSolution.utils.setComplaintStatus
 
@@ -98,6 +100,12 @@ class ComplaintDetailFragment : Fragment() {
                     complaint?.apply {
                         if (status != STATUS_SOLVED)
                             isOfficerSetup()
+                        else {
+                            binding.ivStatus.setOnClickListener {
+                                showSnackBar(activity, "You can't change status!!!", true)
+                            }
+                        }
+
 
                         database.reference.child(USERS)
                             .child(complainedBy).child(PROFILE_DETAILS)
@@ -169,10 +177,12 @@ class ComplaintDetailFragment : Fragment() {
             postSnackBarDismiss()
         }
 
-        binding.btnSubmit.setOnClickListener {
+        binding.btnAddWorkPhotos.setOnClickListener {
             // upload images and attach to complaint
             if (imagesUris.size > 0) {
                 val image = imagesUris[0]
+                val myDialog = MySpinner(activity, "Please Wait", "We are uploading your image")
+                myDialog.startLoading()
                 val imageReference =
                     FirebaseStorage.getInstance().reference.child(COMPLAINT_IMAGES)
                         .child(complaintId).child(
@@ -197,6 +207,7 @@ class ComplaintDetailFragment : Fragment() {
                                             ).show()
                                             imagesUris.clear()
                                             selectImageRecyclerViewAdapter.notifyDataSetChanged()
+                                            myDialog.dismissDialog()
                                         } else
                                             Log.d(
                                                 TAG,
@@ -259,8 +270,6 @@ class ComplaintDetailFragment : Fragment() {
                         }
                         confirmationDialog.show()
                     }
-                    else
-                        showSnackBar(activity,"You can't change status again to pending!!!")
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -272,9 +281,19 @@ class ComplaintDetailFragment : Fragment() {
     private fun changeStatusToSolved(complaintId: String) {
         database.reference.child(COMPLAINTS).child(complaintId).child(STATUS)
             .setValue(STATUS_SOLVED).addOnCompleteListener { task ->
-                if (task.isSuccessful)
-                    showSnackBar(activity, "Changed status successfully", false)
-                else
+                if (task.isSuccessful) {
+                    database.reference.child(COMPLAINTS).child(complaintId).child(SOLVED_BY)
+                        .setValue(FirebaseAuth.getInstance().uid!!).addOnCompleteListener { task1 ->
+                            if (task1.isSuccessful)
+                                showSnackBar(activity, "Changed status successfully", false)
+                            else
+                                showSnackBar(
+                                    activity,
+                                    "Some Error occurred!!!\nPlease try again",
+                                    false
+                                )
+                        }
+                } else
                     showSnackBar(activity, "Some Error occurred!!!\nPlease try again", false)
             }
     }
@@ -306,19 +325,16 @@ class ComplaintDetailFragment : Fragment() {
                     Log.d(TAG, "complaint details: $currUser")
                     if (currUser!!.isOfficer) {
                         preSnackBarDismiss()
-                        setChangeStatusSpinnerAdapter()
                         binding.apply {
-                            spChangeStatus.setOnClickListener {
-                                showSnackBar(activity,"You don't have permission to change status of application",true)
-                            }
                             snackBar.show()
                             labelAddComplaintPhotos.visibility = View.VISIBLE
                             ivImages.visibility = View.VISIBLE
                             constraintLayout.visibility = View.VISIBLE
                             btnAddImage.visibility = View.VISIBLE
                             rvSelectImage.visibility = View.VISIBLE
-                            btnSubmit.visibility = View.VISIBLE
+                            btnAddWorkPhotos.visibility = View.VISIBLE
                         }
+                        setChangeStatusSpinnerAdapter()
                     }
                 }
 

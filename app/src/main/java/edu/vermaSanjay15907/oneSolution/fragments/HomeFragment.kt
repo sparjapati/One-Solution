@@ -142,6 +142,7 @@ class HomeFragment : Fragment() {
                 .child(district).child(cityOrVillage)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(allComplaints: DataSnapshot) {
+                        complaints.clear()
                         for (c in allComplaints.children) {
                             val complaintId = c.value.toString()
                             database.reference.child(COMPLAINTS).child(complaintId)

@@ -14,5 +14,6 @@ data class Complaint(
     var workImages: String = "",
     var status: String = STATUS_PENDING,
     var description: String = "",
-    var complaintId: String = ""
+    var complaintId: String = "",
+    var solvedBy:String = ""
 ):Parcelable
