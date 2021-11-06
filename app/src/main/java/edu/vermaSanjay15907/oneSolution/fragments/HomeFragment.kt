@@ -51,6 +51,7 @@ class HomeFragment : Fragment() {
         val homeActivityComplaintListAdapter =
             setComplaintListAdapter(complaints)
 
+        binding.rvComplaints.showShimmer()
         database.reference.child(USERS).child(auth.uid!!).child(PROFILE_DETAILS)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -59,7 +60,7 @@ class HomeFragment : Fragment() {
                         getOfficerComplaints(currUser, complaints, homeActivityComplaintListAdapter)
                     } else
                         getUserComplaints(complaints, homeActivityComplaintListAdapter)
-
+                    binding.rvComplaints.hideShimmer()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
