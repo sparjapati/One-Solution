@@ -13,12 +13,19 @@
         android:layout_height="match_parent"
         tools:context=".fragments.HomeFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.todkars.shimmer.ShimmerRecyclerView
             android:id="@+id/rvComplaints"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shimmer_recycler_item_count="10"
+            app:shimmer_recycler_layout="@layout/shimmer_home_recycler_view_layout"
+            tools:ignore="SpeakableTextPresentCheck">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        </com.todkars.shimmer.ShimmerRecyclerView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAddNewComplaint"
