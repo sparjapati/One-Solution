@@ -21,17 +21,10 @@ class HomeActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(binding.homeActivityFragmentContainerView.id) as NavHostFragment
         navController = navHost.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
+    }
 
-//        binding.navView.setNavigationItemSelectedListener { item: MenuItem ->
-//            val fragmentClass: Class
-//            when (item.itemId) {
-//                R.id.aboutFragment -> {
-//                    fragmentClass = AboutUsFragment::class
-//                }
-//            }
-//            true
-//        }
-
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
 }
