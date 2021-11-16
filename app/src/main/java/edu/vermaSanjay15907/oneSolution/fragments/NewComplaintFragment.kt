@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -31,9 +32,13 @@ import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINTS_BY_LOCATIONS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.COMPLAINT_IMAGES
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.GET_IMAGE_REQUEST_CODE
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.SUBMITTED_IMAGES
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.showSnackBar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -91,7 +96,7 @@ class NewComplaintFragment : Fragment() {
         return binding.root
     }
 
-    public fun immutableField() {
+    private fun immutableField() {
         showSnackBar(
             activity,
             "Sorry, You can't change this field, It's value is referenced from your profile",
@@ -124,36 +129,34 @@ class NewComplaintFragment : Fragment() {
             })
     }
 
+    private fun uploadImages(key: String, uploadCount: Int = 0) {
+        val mainReference = storage.reference.child(COMPLAINT_IMAGES).child(key).child(
+            SUBMITTED_IMAGES
+        )
+        if (uploadCount < imagesUris.size) {
+            val name = "image${uploadCount+1}"
+            val ref = mainReference.child(name)
+            ref.putFile(imagesUris[uploadCount]).addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener {
+                    complaint.submittedImages +=" $it"
+//                    Log.d(TAG, "uploadImages: uploaded $name to $it")
+                    uploadImages(key, uploadCount + 1)
+                }
+            }
+        } else
+            uploadComplaint(key)
+    }
+
     private fun submitComplaint() {
         val key = database.reference.child(COMPLAINTS).push().key
         if (key != null) {
             complaint.complaintId = key
-            if (imagesUris.size > 0) {
-                val image = imagesUris[0]
-                val imageReference =
-                    storage.reference.child(COMPLAINT_IMAGES).child(key).child(COMPLAINT_IMAGES)
-                        .child(image.lastPathSegment.toString())
-
-                imageReference.putFile(image)
-                    .addOnCompleteListener { imageUploadTask ->
-                        if (imageUploadTask.isSuccessful) {
-                            Log.d(TAG, "submitComplaint: image uploaded")
-                            imageReference.downloadUrl.addOnSuccessListener { urlUri ->
-                                Log.d(TAG, "submitComplaint: $urlUri")
-                                complaint.submittedImages = urlUri.toString()
-                                uploadComplaint(key)
-                            }
-                        } else {
-                            Log.d(TAG, "submitComplaint: Some error occurred while uploading image")
-                            onComplaintSubmissionFailure()
-                        }
-                    }
-            } else
-                uploadComplaint(key)
+            uploadImages(key)
         }
     }
 
     private fun uploadComplaint(key: String?) {
+        complaint.submittedImages = complaint.submittedImages.trim()
         database.reference.child(COMPLAINTS).child(key!!).setValue(complaint)
             .addOnCompleteListener { uploadComplaintTask ->
                 if (uploadComplaintTask.isSuccessful) {
@@ -173,20 +176,20 @@ class NewComplaintFragment : Fragment() {
         )
 
         val snackBar =
-            activity?.let {
+            activity.let {
                 Snackbar.make(
                     it.findViewById(android.R.id.content),
                     "Some Error Occurred!!!\nPlease try again",
                     Snackbar.LENGTH_LONG
                 )
             }
-        activity?.let {
+        activity.let {
             ContextCompat.getColor(
                 it,
                 R.color.colorSnackbarError
             )
-        }?.let {
-            snackBar?.view?.setBackgroundColor(
+        }.let {
+            snackBar.view.setBackgroundColor(
                 it
             )
         }
@@ -198,7 +201,7 @@ class NewComplaintFragment : Fragment() {
             .child(COMPLAINTS).child(complaint.date)
             .setValue(key)
             .addOnCompleteListener { userLinkTask ->
-                if (userLinkTask.isSuccessful) {
+               if (userLinkTask.isSuccessful) {
                     Log.d(
                         TAG,
                         "submitComplaint: linked to user successfully"
@@ -275,24 +278,24 @@ class NewComplaintFragment : Fragment() {
         Log.d(TAG, "Complaint submitted")
         dialog.dismiss()
         val snackBar =
-            activity?.let {
+            activity.let {
                 Snackbar.make(
                     it.findViewById(android.R.id.content),
                     "Complaint Submitted Successfully",
                     Snackbar.LENGTH_LONG
                 )
             }
-        activity?.let {
+        activity.let {
             ContextCompat.getColor(
                 it,
                 R.color.colorSnackbarSuccess
             )
-        }?.let {
-            snackBar?.view?.setBackgroundColor(
+        }.let {
+            snackBar.view.setBackgroundColor(
                 it
             )
         }
-        snackBar?.show()
+        snackBar.show()
         findNavController().navigate(NewComplaintFragmentDirections.actionNewComplaintFragmentToHomeFragment())
     }
 

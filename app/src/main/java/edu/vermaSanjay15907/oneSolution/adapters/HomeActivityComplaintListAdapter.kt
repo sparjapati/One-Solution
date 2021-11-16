@@ -1,6 +1,7 @@
 package edu.vermaSanjay15907.oneSolution.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import edu.vermaSanjay15907.oneSolution.fragments.HomeFragmentDirections
 import edu.vermaSanjay15907.oneSolution.models.Complaint
 import edu.vermaSanjay15907.oneSolution.models.User
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.PROFILE_DETAILS
+import edu.vermaSanjay15907.oneSolution.utils.Konstants.TAG
 import edu.vermaSanjay15907.oneSolution.utils.Konstants.USERS
 import edu.vermaSanjay15907.oneSolution.utils.setComplaintStatus
 
@@ -46,16 +48,14 @@ class HomeActivityComplaintListAdapter(
                             "${complaint.address.nearByLocation}, ${complaint.address.cityOrVillage}, ${complaint.address.district}, ${complaint.address.state}"
                         holder.binding.tvComplaintDate.text = TimeAgo.using(complaint.date.toLong())
                         holder.binding.ivStatus.setComplaintStatus(complaint.status)
-//                        if (complaint.images.size > 0)
-//                            Picasso.get().load(complaint.images[0])
-//                                .placeholder(R.drawable.placeholder)
-//                                .into(holder.complaintPhoto)
-                        if (complaint.submittedImages != "") {
-                            Picasso.get().load(complaint.submittedImages)
+                        val allImages = complaint.submittedImages.split(" ")
+                        val firstImage = allImages[0]
+                        if (firstImage.isNotEmpty()) {
+                            Picasso.get().load(firstImage)
                                 .placeholder(R.drawable.placeholder)
                                 .into(holder.binding.ivComplaintPhoto)
                         }
-
+                        
                     }
 
                     override fun onCancelled(error: DatabaseError) {
