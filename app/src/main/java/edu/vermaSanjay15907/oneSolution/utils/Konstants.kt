@@ -1,6 +1,9 @@
 package edu.vermaSanjay15907.oneSolution.utils
 
 import android.app.Activity
+import android.app.Service
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
@@ -25,10 +28,11 @@ object Konstants {
     const val USERS = "users"
     const val COMPLAINTS = "complaints"
     const val COMPLAINT_IMAGES = "complaint_images"
+    const val SUBMITTED_IMAGES = "submitted_images"
     const val COMPLAINTS_BY_LOCATIONS = "complaints_by_locations"
     const val PROFILE_DETAILS = "profile_details"
     const val GET_IMAGE_REQUEST_CODE = 100
-    const val WORK_DOCUMENTS = "workImages"
+    const val WORK_IMAGES = "workImages"
     const val DEFAULT_STATE = "Select Your State"
     const val DEFAULT_DISTRICT = "Select Your District"
     const val BLANK = ""
@@ -82,7 +86,7 @@ object Konstants {
     }
 
     val workDocumentReference by lazy {
-        complaintsImagesReference.child(WORK_DOCUMENTS)
+        complaintsImagesReference.child(WORK_IMAGES)
     }
 
     fun hideKeyboard(activity: Activity) {
@@ -114,6 +118,13 @@ object Konstants {
             ContextCompat.getColor(activity, R.color.colorSnackbarSuccess)
         snackBar.view.setBackgroundColor(color)
         snackBar.show()
+    }
+
+    fun copyToClipBoard(activity:Activity,text:String)
+    {
+        val clipboardManager = activity.getSystemService(Service.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("One-Solution-Complaint-Address",text)
+        clipboardManager.setPrimaryClip(clip)
     }
 }
 

@@ -9,7 +9,6 @@ data class Complaint(
     var complainedBy: String = "",
     var address: Address = Address(),
     var date: String = "",
-//    var images: ArrayList<String> = ArrayList(),
     var submittedImages: String = "",
     var workImages: String = "",
     var status: String = STATUS_PENDING,
