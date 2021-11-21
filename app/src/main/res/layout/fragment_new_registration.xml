@@ -6,7 +6,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E7D17E"
+        android:background="#FAF8F4"
         tools:context=".fragments.NewRegistrationFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/register_now"
-                android:textColor="#BC1396"
+                android:textColor="#632CC6"
                 android:textSize="34sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +212,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="5dp"
-                android:background="@android:color/holo_green_dark"
+                android:background="@color/white"
                 android:padding="5dp"
                 android:text="@string/are_you_an_officer"
                 android:textSize="22sp"
@@ -241,9 +241,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:backgroundTint="#94E07A"
+                android:backgroundTint="#673AB7"
                 android:text="@string/sign_up"
-                android:textColor="#673AB7"
+                android:textColor="#E7E4ED"
+                app:cornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.536"
                 app:layout_constraintStart_toStartOf="parent"

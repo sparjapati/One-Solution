@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash"
+    android:background="@drawable/bg_splash"
     tools:context=".activities.SplashActivity">
 
-
-    <TextView
-        android:id="@+id/tvAppName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="#DA1313"
-        android:textSize="34sp"
-        android:textStyle="bold|italic"
+    <ImageView
+        android:id="@+id/logo_splash"
+        android:layout_width="302dp"
+        android:layout_height="469dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="264dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/splash" />
 </androidx.constraintlayout.widget.ConstraintLayout>

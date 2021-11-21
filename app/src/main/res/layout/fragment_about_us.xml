@@ -1,135 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#E5D590"
-    tools:context=".fragments.AboutUsFragment">
+    android:layout_height="match_parent">
 
-
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="30dp"
-        android:contentDescription="@string/logo"
-        android:scaleType="fitCenter"
-        android:src="@drawable/one_solution"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_corner_radius="20dp"
-        tools:ignore="ImageContrastCheck" />
-
-    <TextView
-        android:id="@+id/tvAppInfo"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:layout_marginTop="12dp"
-        android:gravity="center_horizontal"
-        android:padding="3dp"
-        android:text="@string/about_us_desc"
-        android:textColor="#1B5E20"
-        app:layout_constraintEnd_toEndOf="@+id/ivLogo"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/ivLogo"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
-
-    <TextView
-        android:id="@+id/tvDeveloperLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/developers"
-        android:textColor="#0D13BC"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tvAppInfo"
-        app:layout_constraintStart_toStartOf="@+id/tvAppInfo"
-        app:layout_constraintTop_toBottomOf="@+id/tvAppInfo" />
-
-    <TextView
-        android:id="@+id/tvDeveloperSanjay"
-        style="@style/about_us_developer_names"
-        android:layout_marginTop="8dp"
-        android:text="@string/sanjay_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeveloperLabel" />
-
-    <TextView
-        android:id="@+id/tvDeveloperSanjayEmail"
-        style="@style/about_us_developer_email"
-        android:layout_height="0dp"
-        android:autoLink="email"
-        android:text="@string/sanjay_email"
-        android:textColor="#1B5E20"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDeveloperSanjay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDeveloperSanjay"
-        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-    <TextView
-        android:id="@+id/tvDeveloperNikita"
-        style="@style/about_us_developer_names"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="6dp"
-        android:text="@string/nikita_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeveloperSanjay" />
-
-    <TextView
-        android:id="@+id/tvDeveloperNikitaEmail"
-        style="@style/about_us_developer_email"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:autoLink="email"
-        android:text="@string/nikita_email"
-        android:textColor="#1B5E20"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDeveloperNikita"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDeveloperNikita"
-        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-    <TextView
-        android:id="@+id/tvDeveloperTushar"
-        style="@style/about_us_developer_names"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="@string/tushar_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeveloperNikita" />
-
-    <TextView
-        android:id="@+id/tvDeveloperTusharEmail"
-        style="@style/about_us_developer_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:autoLink="email"
-        android:text="@string/tushar_email"
-        android:textColor="#1B5E20"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDeveloperTushar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDeveloperTushar"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/nitkkr_logo"
-        android:padding="6dp"
-        android:src="@drawable/ic_nitkkr_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeveloperTushar" />
+        android:background="#F6F5F8"
+        tools:context=".fragments.AboutUsFragment">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/one_solution"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="30dp"
+            tools:ignore="ImageContrastCheck" />
+
+        <TextView
+            android:id="@+id/tvAppInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center_horizontal"
+            android:padding="3dp"
+            android:text="@string/about_us_desc"
+            android:textColor="#430494"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivLogo"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/ivLogo"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+        <TextView
+            android:id="@+id/tvDeveloperLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/developers"
+            android:textColor="#430494"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvAppInfo"
+            app:layout_constraintHorizontal_bias="0.017"
+            app:layout_constraintStart_toStartOf="@+id/tvAppInfo"
+            app:layout_constraintTop_toBottomOf="@+id/tvAppInfo" />
+
+        <TextView
+            android:id="@+id/tvDeveloperSanjay"
+            style="@style/about_us_developer_names"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/sanjay_name"
+            android:textColor="#430494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeveloperLabel" />
+
+        <TextView
+            android:id="@+id/tvDeveloperSanjayEmail"
+            style="@style/about_us_developer_email"
+            android:layout_height="0dp"
+            android:autoLink="email"
+            android:text="@string/sanjay_email"
+            android:textColor="#6c43a1"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDeveloperSanjay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDeveloperSanjay"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tvDeveloperNikita"
+            style="@style/about_us_developer_names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/nikita_name"
+            android:textColor="#430494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeveloperSanjay" />
+
+        <TextView
+            android:id="@+id/tvDeveloperNikitaEmail"
+            style="@style/about_us_developer_email"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:autoLink="email"
+            android:text="@string/nikita_email"
+            android:textColor="#6c43a1"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDeveloperNikita"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDeveloperNikita"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tvDeveloperTushar"
+            style="@style/about_us_developer_names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/tushar_name"
+            android:textColor="#430494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeveloperNikita" />
+
+        <TextView
+            android:id="@+id/tvDeveloperTusharEmail"
+            style="@style/about_us_developer_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoLink="email"
+            android:text="@string/tushar_email"
+            android:textColor="#6c43a1"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDeveloperTushar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDeveloperTushar"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+        <ImageView
+            android:id="@+id/tvNitkkrLogo"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:contentDescription="@string/nitkkr_logo"
+            android:padding="6dp"
+            android:src="@drawable/ic_nitkkr_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeveloperTushar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+

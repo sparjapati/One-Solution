@@ -60,4 +60,14 @@
             app:popEnterAnim="@anim/pop_entering_anim"
             app:popExitAnim="@anim/pop_exit_anim" />
     </fragment>
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="edu.vermaSanjay15907.oneSolution.fragments.FeedbackFragment"
+        android:label="Feedback"
+        tools:layout="@layout/fragment_feedback" />
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="edu.vermaSanjay15907.oneSolution.fragments.HelpFragment"
+        android:label="Help Me"
+        tools:layout="@layout/fragment_help" />
 </navigation>

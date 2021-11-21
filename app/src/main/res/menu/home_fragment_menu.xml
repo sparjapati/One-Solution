@@ -4,10 +4,16 @@
 
     <item
         android:id="@+id/editProfileFragment"
-        android:title="Edit Your Profile" />
+        android:title="@string/mi_edit_your_profile" />
+    <item
+        android:id="@+id/feedbackFragment"
+        android:title="@string/mi_feedback" />
     <item
         android:id="@+id/aboutFragment"
         android:title="@string/about_us" />
+    <item
+        android:id="@+id/helpFragment"
+        android:title="@string/mi_help_me" />
     <item
         android:id="@+id/miSignOut"
         android:enabled="true"

@@ -185,13 +185,7 @@ class HomeFragment : Fragment() {
                 startActivity(Intent(activity, LoginActivity::class.java))
                 return true
             }
-            R.id.aboutFragment -> {
-                return NavigationUI.onNavDestinationSelected(
-                    item,
-                    requireView().findNavController()
-                )
-            }
-            R.id.editProfileFragment -> {
+            R.id.aboutFragment, R.id.feedbackFragment, R.id.helpFragment, R.id.editProfileFragment -> {
                 return NavigationUI.onNavDestinationSelected(
                     item,
                     requireView().findNavController()

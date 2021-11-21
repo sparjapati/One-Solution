@@ -13,7 +13,13 @@
     <string name="gender">Gender</string>
     <string name="address">Address</string>
     <string name="sign_up">Sign Up</string>
+    <string name="send">Send</string>
+    <string name="message">Message</string>
+    <string name="add_complaint">1.To ADD NEW COMPLAINT click on the + icon in the right bottom corner </string>
+    <string name="check_status">2.To CHECK STATUS of your complaint \n check the color of the box below your complaint GREEN-SOLVED \n YELLOW -IN PROGRESS</string>
+    <string name="other_query">3.For any other query please go to the feedback option available in menu</string>
     <string name="register_now">Register Now</string>
+    <string name="just_one_click">just one click</string>
     <string name="complaint_photo">Complaint Photo</string>
     <string name="complaint_address">Complaint Address</string>
     <string name="posted_date">Posted date</string>
@@ -54,7 +60,13 @@
     <string name="attached_photos">Attached photos</string>
     <string name="noImageUploaded">No image uploaded by user</string>
     <string name="imageNo">0</string>
-    <string name="about_us_desc">This app <b>One Solution</b> has been developed by <b>NIT Kurukshetra</b> students. It facilitates the users to use their smartphone to work smartly. Using this app, you can submit your nearby issues or complaints to the concerned authority. All your need to create a free account and submit complaint and get status sitting at home.</string>
+    <string name="about_us_desc">
+This app
+<b>One Solution</b>
+has been developed by
+<b>NIT Kurukshetra</b>
+students. It facilitates the users to use their smartphone to work smartly. Using this app, you can submit your nearby issues or complaints to the concerned authority. All your need to create a free account and submit complaint and get status sitting at home.
+</string>
     <string name="developers">-:Developers:-</string>
     <string name="tushar_name">Tushar</string>
     <string name="nikita_email">nikita_11912005@nitkkr.ac.in</string>
@@ -70,7 +82,9 @@
     <string name="add_these_photos">Add these Photos</string>
     <string name="work_photos">Submitted Photos</string>
     <string name="no_work_has_been_done">No work has been done</string>
-
+    <string name="mi_edit_your_profile">Edit Your Profile</string>
+    <string name="mi_feedback">Feedback</string>
+    <string name="mi_help_me">Help Me</string>
     <string-array name="array_indian_states">
         <item>Select Your State</item>
         <item>Andaman and Nicobar Islands</item>
@@ -114,12 +128,10 @@
     <string-array name="array_default_districts">
         <item>Select Your District</item>
     </string-array>
-
     <string-array name="complaint_status">
         <item>Pending</item>
         <item>Solved</item>
     </string-array>
-
     <string-array name="array_andhra_pradesh_districts">
         <item>Select Your District</item>
         <item>Anantapur</item>
