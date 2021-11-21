@@ -63,11 +63,11 @@
     <fragment
         android:id="@+id/feedbackFragment"
         android:name="edu.vermaSanjay15907.oneSolution.fragments.FeedbackFragment"
-        android:label="fragment_feedback"
+        android:label="Feedback"
         tools:layout="@layout/fragment_feedback" />
     <fragment
         android:id="@+id/helpFragment"
         android:name="edu.vermaSanjay15907.oneSolution.fragments.HelpFragment"
-        android:label="fragment_help"
+        android:label="Help Me"
         tools:layout="@layout/fragment_help" />
 </navigation>
