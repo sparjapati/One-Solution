@@ -14,6 +14,7 @@
     <string name="address">Address</string>
     <string name="sign_up">Sign Up</string>
     <string name="register_now">Register Now</string>
+    <string name="just_one_click">just one click</string>
     <string name="complaint_photo">Complaint Photo</string>
     <string name="complaint_address">Complaint Address</string>
     <string name="posted_date">Posted date</string>
@@ -70,6 +71,9 @@
     <string name="add_these_photos">Add these Photos</string>
     <string name="work_photos">Submitted Photos</string>
     <string name="no_work_has_been_done">No work has been done</string>
+    <string name="mi_edit_your_profile">Edit Your Profile</string>
+    <string name="mi_feedback">Feedback</string>
+    <string name="mi_help_me">Help Me</string>
 
     <string-array name="array_indian_states">
         <item>Select Your State</item>
